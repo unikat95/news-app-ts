@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.modal-anim {
+  animation: modal-opacity 0.4s forwards;
+}
+
+@keyframes modal-opacity {
+  from {
+    opacity: 0;
+    transform: translateY(-30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

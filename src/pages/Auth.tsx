@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useContext, useState } from "react";
+
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
@@ -7,12 +8,15 @@ import {
 import { auth, db } from "../config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { NewsContext } from "../context/NewsContext";
+
 import FormButton from "../components/FormButton/FormButton";
 
 export default function Auth() {
   const { currentUser } = useContext(NewsContext) || {};
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -22,12 +26,15 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
+    if (Object.values(formData).some((value) => value === ""))
+      return setLoading(false);
+
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
       .then(async (userCredential) => {
         const user = userCredential.user.uid;
         const userData = {
           id: user,
-          email: email,
+          email: formData.email,
           firstName: "",
           lastName: "",
           age: "--",
@@ -37,6 +44,7 @@ export default function Auth() {
         };
 
         await setDoc(doc(db, "users", user), userData);
+
         navigate("/profile");
       })
       .catch((err) => {
@@ -49,7 +57,7 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
 
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then(() => {})
       .catch((err) => {
         console.log(err);
@@ -57,12 +65,14 @@ export default function Auth() {
       });
   };
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+
   const handleMethodChange = () => {
     setIsSignedIn(!isSignedIn);
   };
@@ -78,16 +88,18 @@ export default function Auth() {
         <div className="w-2/3 flex flex-col gap-2">
           <input
             type="email"
+            name="email"
             placeholder="Email..."
-            value={email}
-            onChange={handleEmailChange}
+            value={formData.email}
+            onChange={handleInputChange}
             className="w-auto h-auto bg-slate-50 border-l-4 border-slate-400 focus:border-blue-500 p-2 outline-none"
           />
           <input
             type="password"
+            name="password"
             placeholder="Password..."
-            value={password}
-            onChange={handlePasswordChange}
+            value={formData.password}
+            onChange={handleInputChange}
             className="w-auto h-auto bg-slate-50 border-l-4 border-slate-400 focus:border-blue-500 p-2 outline-none"
           />
         </div>
