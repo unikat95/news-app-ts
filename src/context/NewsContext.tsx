@@ -69,7 +69,12 @@ export default function NewsProvider({ children }: NewsProviderProps) {
     return () => unsubscribe();
   }, [user]);
 
-  if (loading || initializing) return "loading..";
+  if (loading || initializing)
+    return (
+      <div className="w-[100dvw] h-screen flex justify-center items-center">
+        Loading...
+      </div>
+    );
 
   return (
     <NewsContext.Provider
