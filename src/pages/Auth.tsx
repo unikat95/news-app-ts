@@ -7,6 +7,7 @@ import {
 import { auth, db } from "../config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { NewsContext } from "../context/NewsContext";
+import FormButton from "../components/FormButton/FormButton";
 
 export default function Auth() {
   const { currentUser } = useContext(NewsContext) || {};
@@ -31,7 +32,6 @@ export default function Auth() {
         };
 
         await setDoc(doc(db, "users", user), userData);
-        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -47,6 +47,7 @@ export default function Auth() {
       .then(() => {})
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
@@ -64,42 +65,55 @@ export default function Auth() {
 
   return (
     <>
-      <h1>{isSignedIn ? "Sign In" : "Sign Up"}</h1>
-      <form>
-        <input
-          type="email"
-          placeholder="Email..."
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <input
-          type="password"
-          placeholder="Password..."
-          value={password}
-          onChange={handlePasswordChange}
-        />
+      <form className="w-full h-auto flex flex-col justify-center items-center gap-5">
+        <h1 className="text-xl font-medium text-slate-800">
+          {isSignedIn ? "Sign In" : "Sign Up"}
+        </h1>
+        <div className="w-2/3 flex flex-col gap-2">
+          <input
+            type="email"
+            placeholder="Email..."
+            value={email}
+            onChange={handleEmailChange}
+            className="w-auto h-auto bg-slate-50 border-l-4 border-slate-400 focus:border-blue-500 p-2 outline-none"
+          />
+          <input
+            type="password"
+            placeholder="Password..."
+            value={password}
+            onChange={handlePasswordChange}
+            className="w-auto h-auto bg-slate-50 border-l-4 border-slate-400 focus:border-blue-500 p-2 outline-none"
+          />
+        </div>
         {isSignedIn ? (
-          <button onClick={handleSignIn}>Sign In</button>
+          <FormButton
+            text="Sign In"
+            handleClick={handleSignIn}
+            loading={loading}
+          />
         ) : (
-          <button onClick={handleSignUp}>Sign Up</button>
+          <FormButton
+            text="Sign Up"
+            handleClick={handleSignUp}
+            loading={loading}
+          />
+        )}
+        {isSignedIn ? (
+          <div>
+            Don`t have an account?{" "}
+            <Link to="" onClick={handleMethodChange} className="underline">
+              Sign Up!
+            </Link>
+          </div>
+        ) : (
+          <div>
+            Already have an account?{" "}
+            <Link to="" onClick={handleMethodChange} className="underline">
+              Sign In!
+            </Link>
+          </div>
         )}
       </form>
-      {isSignedIn ? (
-        <div>
-          Don`t have an account?{" "}
-          <Link to="" onClick={handleMethodChange}>
-            Sign Up!
-          </Link>
-        </div>
-      ) : (
-        <div>
-          Already have an account?{" "}
-          <Link to="" onClick={handleMethodChange}>
-            Sign In!
-          </Link>
-        </div>
-      )}
-      {loading && <div>loading...</div>}
     </>
   );
 }

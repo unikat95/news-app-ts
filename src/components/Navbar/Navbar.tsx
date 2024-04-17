@@ -5,8 +5,11 @@ import { NewsContext } from "../../context/NewsContext";
 export default function Navbar() {
   const { currentUser } = useContext(NewsContext) || {};
   return (
-    <nav>
-      <ul>
+    <nav className="w-full h-auto flex justify-between">
+      <div>
+        <Link to="/">NewsApp_</Link>
+      </div>
+      <ul className="w-auto h-auto flex gap-5">
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
