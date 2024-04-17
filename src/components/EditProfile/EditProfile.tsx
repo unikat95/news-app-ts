@@ -64,17 +64,17 @@ export default function EditProfile({ user }: EditProfileProps) {
   return (
     <>
       <div className="w-[100dvw] h-screen flex justify-center items-center absolute top-0 left-0 bg-slate-900 bg-opacity-70">
-        <div className="w-auto max-w-[50%] flex flex-col gap-5 bg-white p-10 rounded-xl">
+        <div className="w-full max-w-[80%] md:max-w-[25%] flex flex-col gap-5 bg-white p-10 rounded-xl">
           <h1 className="flex justify-center items-center text-2xl font-medium">
             User detail
           </h1>
-          <form className=" flex flex-col gap-10">
-            <div className="flex flex-col gap-4">
-              <label htmlFor="firstName">
+          <form className="w-full flex flex-col gap-10">
+            <div className="w-full flex flex-col gap-4">
+              <label htmlFor="firstName" className="w-full">
                 <p className="text-slate-400">First Name:</p>
                 <input
                   type="text"
-                  className="w-[300px] bg-slate-50 border border-slate-200 rounded-md p-2 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-md p-2 outline-none"
                   placeholder={defaultFirstName}
                   value={firstName}
                   onChange={handleFirstNameChange}
@@ -84,7 +84,7 @@ export default function EditProfile({ user }: EditProfileProps) {
                 <p className="text-slate-400">Last Name:</p>
                 <input
                   type="text"
-                  className="w-[300px] bg-slate-50 border border-slate-200 rounded-md p-2 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-md p-2 outline-none"
                   placeholder={defaultLastName}
                   value={lastName}
                   onChange={handleLastNameChange}
@@ -94,7 +94,7 @@ export default function EditProfile({ user }: EditProfileProps) {
                 <p className="text-slate-400">Age:</p>
                 <input
                   type="number"
-                  className="w-[300px] bg-slate-50 border border-slate-200 rounded-md p-2 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-md p-2 outline-none"
                   placeholder={defaultAge}
                   value={age}
                   onChange={handleAgeChange}
