@@ -8,12 +8,15 @@ import React, {
 import { auth, db } from "../config/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 
-type UserProps = {
+export type UserProps = {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
+  age: string;
   isAdmin: boolean;
+  completed: boolean;
+  inEditing: boolean;
 };
 
 type NewsContextProps = {
@@ -25,6 +28,10 @@ type NewsContextProps = {
   setLoading: React.Dispatch<SetStateAction<boolean>>;
   initializing: boolean;
   setInitializing: React.Dispatch<SetStateAction<boolean>>;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<SetStateAction<boolean>>;
+  handleCloseModal: () => void;
+  handleOpenModal: () => void;
 };
 
 type NewsProviderProps = {
@@ -38,6 +45,15 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [currentUser, setCurrentUser] = useState<UserProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -87,6 +103,10 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setLoading,
         initializing,
         setInitializing,
+        isModalOpen,
+        setIsModalOpen,
+        handleCloseModal,
+        handleOpenModal,
       }}
     >
       {children}

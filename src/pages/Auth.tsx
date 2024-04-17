@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useContext, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -16,6 +16,8 @@ export default function Auth() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleSignUp = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
@@ -28,10 +30,14 @@ export default function Auth() {
           email: email,
           firstName: "",
           lastName: "",
+          age: "--",
           isAdmin: false,
+          completed: false,
+          inEditing: false,
         };
 
         await setDoc(doc(db, "users", user), userData);
+        navigate("/profile");
       })
       .catch((err) => {
         console.log(err);
