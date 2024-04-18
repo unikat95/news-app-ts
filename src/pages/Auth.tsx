@@ -31,9 +31,9 @@ export default function Auth() {
 
     createUserWithEmailAndPassword(auth, formData.email, formData.password)
       .then(async (userCredential) => {
-        const user = userCredential.user.uid;
+        const currUser = userCredential.user.uid;
         const userData = {
-          id: user,
+          id: currUser,
           email: formData.email,
           firstName: "",
           lastName: "",
@@ -43,9 +43,8 @@ export default function Auth() {
           inEditing: false,
         };
 
-        await setDoc(doc(db, "users", user), userData);
-
         navigate("/profile");
+        await setDoc(doc(db, "users", currUser), userData);
       })
       .catch((err) => {
         console.log(err);
@@ -77,7 +76,7 @@ export default function Auth() {
     setIsSignedIn(!isSignedIn);
   };
 
-  if (currentUser) return <Navigate to="/"></Navigate>;
+  if (currentUser?.completed) return <Navigate to="/"></Navigate>;
 
   return (
     <>

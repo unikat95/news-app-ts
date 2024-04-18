@@ -32,7 +32,7 @@ export default function Profile() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center gap-2">
-      <div className="flex flex-col justify-center items-end gap-5 p-5 rounded-xl shadow-md">
+      <div className="w-full sm:max-w-[50%] flex flex-col justify-center items-end gap-5 p-5 rounded-xl shadow-md">
         <UserDetails />
         <div className="flex gap-3">
           <button

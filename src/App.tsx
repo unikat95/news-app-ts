@@ -5,7 +5,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Layut from "./Layut";
+import Layout from "./Layout";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
@@ -16,7 +16,7 @@ import Dashboard from "./pages/Dashboard";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layut />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
           path="/profile"

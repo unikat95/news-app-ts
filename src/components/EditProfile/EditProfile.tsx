@@ -65,7 +65,7 @@ export default function EditProfile({ user }: EditProfileProps) {
   return (
     <>
       <div
-        className="w-[100dvw] h-screen flex justify-center items-center absolute top-0 left-0 bg-slate-900 bg-opacity-80"
+        className="w-[100dvw] h-screen flex justify-center items-center absolute top-0 left-0 bg-slate-900 bg-opacity-90 modal-bg"
         onClick={handleCancelChanges}
       >
         <div
@@ -79,18 +79,21 @@ export default function EditProfile({ user }: EditProfileProps) {
             <div className="w-full flex flex-col gap-4">
               <EditProfileInput
                 name="First name"
+                type="text"
                 value="firstName"
                 formData={formData.firstName}
                 handleInputChange={handleInputChange}
               />
               <EditProfileInput
                 name="Last name"
+                type="text"
                 value="lastName"
                 formData={formData.lastName}
                 handleInputChange={handleInputChange}
               />
               <EditProfileInput
                 name="Age"
+                type="number"
                 value="age"
                 formData={formData.age}
                 handleInputChange={handleInputChange}
