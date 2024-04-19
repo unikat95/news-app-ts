@@ -5,6 +5,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+
+import { FaHome } from "react-icons/fa";
+import { RiErrorWarningLine } from "react-icons/ri";
+
 import { auth, db } from "../config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { NewsContext } from "../context/NewsContext";
@@ -19,15 +23,18 @@ export default function Auth() {
   });
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>("");
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
   const handleSignUp = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
-
-    if (Object.values(formData).some((value) => value === ""))
-      return setLoading(false);
+    setError("");
+    setEmailError(false);
+    setPasswordError(false);
 
     createUserWithEmailAndPassword(auth, formData.email, formData.password)
       .then(async (userCredential) => {
@@ -48,6 +55,15 @@ export default function Auth() {
       })
       .catch((err) => {
         console.log(err);
+        setError(err.code);
+        if (formData.email === "") {
+          setEmailError(true);
+          setLoading(false);
+        }
+        if (formData.password === "") {
+          setPasswordError(true);
+          setLoading(false);
+        }
         setLoading(false);
       });
   };
@@ -55,11 +71,23 @@ export default function Auth() {
   const handleSignIn = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
+    setEmailError(false);
+    setPasswordError(false);
 
     signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then(() => {})
       .catch((err) => {
-        console.log(err);
+        console.log(err.code);
+        setError(err.code);
+        if (formData.email === "") {
+          setEmailError(true);
+          setLoading(false);
+        }
+        if (formData.password === "") {
+          setPasswordError(true);
+          setLoading(false);
+        }
         setLoading(false);
       });
   };
@@ -70,67 +98,132 @@ export default function Auth() {
       ...prevData,
       [name]: value,
     }));
+
+    setError("");
+    setEmailError(false);
+    setPasswordError(false);
   };
 
   const handleMethodChange = () => {
     setIsSignedIn(!isSignedIn);
+    setFormData((prev) => ({
+      ...prev,
+      email: "",
+      password: "",
+    }));
+
+    setError("");
+    setEmailError(false);
+    setPasswordError(false);
   };
+
+  function getErrorMessage(error: string | null) {
+    switch (error) {
+      case "auth/email-already-in-use":
+        return "Email already in use";
+      case "auth/invalid-email":
+        return "Invalid email";
+      case "auth/missing-email":
+        return "Field email can not be empty";
+      case "auth/missing-password":
+        return "Field password can not be empty";
+      case "auth/user-disabled":
+      case "auth/user-not-found":
+      case "auth/invalid-credential":
+        return "Invalid email or password";
+      case "auth/too-many-requests": {
+        return "Please try again for a moment";
+      }
+      default:
+        return "Invalid email or password";
+    }
+  }
 
   if (currentUser?.completed) return <Navigate to="/"></Navigate>;
 
   return (
     <>
-      <form className="w-full h-auto flex flex-col justify-center items-center gap-5">
-        <h1 className="text-xl font-medium text-slate-800">
-          {isSignedIn ? "Sign In" : "Sign Up"}
-        </h1>
-        <div className="w-2/3 flex flex-col gap-2">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email..."
-            value={formData.email}
-            onChange={handleInputChange}
-            className="w-auto h-auto bg-slate-50 border-l-4 border-slate-400 focus:border-blue-500 p-2 outline-none"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password..."
-            value={formData.password}
-            onChange={handleInputChange}
-            className="w-auto h-auto bg-slate-50 border-l-4 border-slate-400 focus:border-blue-500 p-2 outline-none"
-          />
-        </div>
-        {isSignedIn ? (
-          <FormButton
-            text="Sign In"
-            handleClick={handleSignIn}
-            loading={loading}
-          />
-        ) : (
-          <FormButton
-            text="Sign Up"
-            handleClick={handleSignUp}
-            loading={loading}
-          />
-        )}
-        {isSignedIn ? (
-          <div>
-            Don`t have an account?{" "}
-            <Link to="" onClick={handleMethodChange} className="underline">
-              Sign Up!
-            </Link>
+      <div className="w-[100dvw] h-[100dvh] absolute top-0 left-0 bg-white md:bg-gradient-to-tr md:from-blue-300 md:to-red-300 flex flex-col justify-center items-center gap-5">
+        <form className="w-full sm:w-[50%] lg:w-[40%] xl:w-[27%] flex md:bg-white flex-col justify-center items-center gap-7 px-5 md:p-8 rounded-md">
+          {loading && <div className="sign-loading"></div>}
+          <h1 className="inline-flex uppercase text-2xl pb-10 text-gray-500 relative after:absolute after:w-full after:h-[2px] after:bg-purple-600 after:bottom-8 after:left-0">
+            {!isSignedIn ? "Account Login" : "Create Account"}
+          </h1>
+          <div className="w-full flex flex-col gap-3">
+            <label htmlFor="email" className="w-full flex flex-col gap-1">
+              <p className="text-xs text-slate-500">Email:</p>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email..."
+                value={formData.email}
+                onChange={handleInputChange}
+                required={emailError}
+                className="bg-zinc-100 outline-none border-l-4 border-slate-300 focus:border-blue-500 text-slate-700 p-3 rounded-sm  required:bg-red-50 required:border-red-500"
+              />
+            </label>
+            <label htmlFor="password" className="w-full flex flex-col gap-1">
+              <p className="text-xs text-slate-500">Password:</p>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password..."
+                value={formData.password}
+                onChange={handleInputChange}
+                required={passwordError}
+                className="bg-zinc-100 outline-none border-l-4 border-slate-300 focus:border-blue-500 text-slate-700 p-3 rounded-sm  required:bg-red-50 required:border-red-500"
+              />
+              <p className="text-xs text-slate-400 text-end">
+                (min 6 characters)
+              </p>
+            </label>
           </div>
-        ) : (
-          <div>
-            Already have an account?{" "}
-            <Link to="" onClick={handleMethodChange} className="underline">
-              Sign In!
-            </Link>
-          </div>
-        )}
-      </form>
+          {!isSignedIn ? (
+            <FormButton
+              text="Sign In"
+              handleClick={handleSignIn}
+              loading={loading}
+            />
+          ) : (
+            <FormButton
+              text="Sign Up"
+              handleClick={handleSignUp}
+              loading={loading}
+            />
+          )}
+          {error && (
+            <div className="w-full bg-red-400 text-red-800 text-sm flex justify-between items-center rounded-md overflow-hidden">
+              <div className="w-auto bg-red-500 text-red-700 p-2">
+                <RiErrorWarningLine size="22" />
+              </div>
+              <div className="w-full flex justify-center items-center">
+                {error && getErrorMessage(error)}
+              </div>
+            </div>
+          )}
+          {!isSignedIn ? (
+            <div>
+              Don`t have an account?{" "}
+              <Link to="" onClick={handleMethodChange} className="underline">
+                Sign Up!
+              </Link>
+            </div>
+          ) : (
+            <div>
+              Already have an account?{" "}
+              <Link to="" onClick={handleMethodChange} className="underline">
+                Sign In!
+              </Link>
+            </div>
+          )}
+        </form>
+        <Link
+          to="/"
+          className="bg-slate-700 hover:bg-blue-500 p-3 rounded-full text-white duration-200"
+        >
+          <FaHome size="22" />
+        </Link>
+      </div>
     </>
   );
 }

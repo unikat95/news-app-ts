@@ -31,23 +31,23 @@ export default function Profile() {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-2">
-      <div className="w-full sm:max-w-[50%] flex flex-col justify-center items-end gap-5 p-5 rounded-xl shadow-md">
+    <div className="flex justify-center items-center">
+      <div className="w-full h-full lg:max-w-[50%] flex flex-col justify-center items-center bg-white shadow-md gap-5 p-5 rounded-md">
         <UserDetails />
-        <div className="flex gap-3">
+        <div className="w-full flex justify-end items-end gap-3">
           <button
-            className="flex justify-center bg-slate-200 px-2 py-1 rounded-md items-center gap-1 text-slate-600 hover:text-slate-950 font-medium"
+            className="w-full flex justify-center bg-slate-200 px-2 py-1 rounded-md items-center gap-1 text-slate-600 hover:text-slate-950 font-medium"
             onClick={handleEditProfile}
           >
+            <IoMdSettings size="16" />
             Edit
-            <IoMdSettings size="16" className="mt-[2px]" />
           </button>
           <button
             onClick={handleSignOut}
-            className="flex justify-center bg-slate-200 px-2 py-1 rounded-md items-center gap-1 text-slate-600 hover:text-slate-950 font-medium"
+            className="w-full flex justify-center bg-slate-200 px-2 py-1 rounded-md items-center gap-1 text-slate-600 hover:text-slate-950 font-medium"
           >
+            <IoIosLogOut size="16" />
             Logout
-            <IoIosLogOut size="16" className="mt-[2px]" />
           </button>
         </div>
       </div>

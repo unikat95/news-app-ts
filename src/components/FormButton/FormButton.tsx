@@ -14,7 +14,7 @@ export default function FormButton({
 }: FormButtonProps) {
   return (
     <button
-      className="flex justify-center items-center gap-3 border-2 border-black bg-black hover:bg-slate-500 hover:border-slate-500 text-white px-3 py-1 rounded-md"
+      className="w-full bg-gradient-to-tr from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-2 rounded-md disabled:cursor-not-allowed flex justify-center items-center gap-1"
       onClick={handleClick}
     >
       {text}

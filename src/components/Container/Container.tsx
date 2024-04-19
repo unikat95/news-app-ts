@@ -6,6 +6,6 @@ type ContainerProps = {
 
 export default function Container({ children }: ContainerProps) {
   return (
-    <div className="w-full h-full flex flex-col gap-5 p-5">{children}</div>
+    <div className="w-full h-full flex flex-col gap-5 md:p-5">{children}</div>
   );
 }

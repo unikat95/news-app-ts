@@ -5,7 +5,7 @@ import { NewsContext } from "../../context/NewsContext";
 export default function Navbar() {
   const { currentUser } = useContext(NewsContext) || {};
   return (
-    <nav className="w-full h-auto flex justify-between">
+    <nav className="w-full h-auto flex justify-between p-5 md:p-0">
       <div>
         <Link to="/">NewsApp_</Link>
       </div>

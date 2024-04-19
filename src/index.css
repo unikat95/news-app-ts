@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Poppins", sans-serif;
+  background: #fafafa;
 }
 
 .modal-anim {
@@ -12,6 +21,17 @@ body {
 
 .modal-bg {
   animation: modal-bg 0.4s forwards;
+}
+
+.sign-loading {
+  @apply bg-blue-500;
+
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: sign-anim 2.5s infinite ease-in-out;
 }
 
 @keyframes modal-opacity {
@@ -31,5 +51,36 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes sign-anim {
+  0% {
+    width: 0%;
+    left: 0;
+  }
+
+  20% {
+    width: 100%;
+    left: 0;
+  }
+
+  40% {
+    width: 0%;
+    left: 100%;
+  }
+
+  60% {
+    width: 100%;
+    left: 0;
+  }
+
+  80% {
+    width: 0;
+    left: 0;
+  }
+  100% {
+    width: 0;
+    left: 0;
   }
 }
