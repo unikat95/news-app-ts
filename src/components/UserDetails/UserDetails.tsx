@@ -1,25 +1,37 @@
 import React, { useContext } from "react";
 import { NewsContext } from "../../context/NewsContext";
 import UserDetail from "../UserDetail/UserDetail";
+import UserAvatar from "../UserAvatar/UserAvatar";
+
+import { MdEmail } from "react-icons/md";
+import { FaPen, FaUser } from "react-icons/fa";
+import { MdAddModerator } from "react-icons/md";
 
 export default function UserDetails() {
   const { currentUser } = useContext(NewsContext) || {};
   return (
     <>
-      <div className="w-40 h-40 bg-blue-400 border-8 border-slate-100 rounded-full flex justify-center items-center text-6xl font-bold text-white">
-        {currentUser?.firstName.slice(0, 1).toUpperCase()}
-        {currentUser?.lastName.slice(0, 1).toUpperCase()}
-      </div>
-      <div className="w-full h-full grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <UserDetail name="First Name" value={currentUser?.firstName} />
-        <UserDetail name="Last Name" value={currentUser?.lastName} />
-        <UserDetail name="Age" value={currentUser?.age} />
-        <UserDetail name="Email" value={currentUser?.email} />
+      <UserAvatar width="3em" height="3em" fontSize="4em" />
+      <div className="w-full grid lg:grid-cols-2 gap-2">
+        <UserDetail
+          name="First Name"
+          value={currentUser?.firstName}
+          Icon={FaUser}
+        />
+        <UserDetail
+          name="Last Name"
+          value={currentUser?.lastName}
+          Icon={FaUser}
+        />
+        <UserDetail name="Age" value={currentUser?.age} Icon={FaUser} />
+        <UserDetail name="Email" value={currentUser?.email} Icon={MdEmail} />
         <UserDetail
           name="Rank"
           value={currentUser?.isAdmin ? "Admin" : "User"}
+          Icon={FaUser}
+          IconAdmin={MdAddModerator}
         />
-        <UserDetail name="Posts" value={"0"} />
+        <UserDetail name="Posts" value={"0"} Icon={FaPen} />
       </div>
     </>
   );

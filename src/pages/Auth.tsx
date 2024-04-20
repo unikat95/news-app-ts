@@ -88,6 +88,11 @@ export default function Auth() {
           setPasswordError(true);
           setLoading(false);
         }
+        if (error === "auth/invalid-credential") {
+          setEmailError(true);
+          setPasswordError(true);
+          setLoading(false);
+        }
         setLoading(false);
       });
   };
@@ -155,6 +160,7 @@ export default function Auth() {
               <input
                 type="email"
                 name="email"
+                id="email"
                 placeholder="Email..."
                 value={formData.email}
                 onChange={handleInputChange}
@@ -167,6 +173,7 @@ export default function Auth() {
               <input
                 type="password"
                 name="password"
+                id="password"
                 placeholder="Password..."
                 value={formData.password}
                 onChange={handleInputChange}

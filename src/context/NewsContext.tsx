@@ -33,6 +33,8 @@ type NewsContextProps = {
   setIsModalOpen: React.Dispatch<SetStateAction<boolean>>;
   handleCloseModal: () => void;
   handleOpenModal: () => void;
+  openPopout: boolean;
+  setOpenPopout: React.Dispatch<SetStateAction<boolean>>;
 };
 
 type NewsProviderProps = {
@@ -47,6 +49,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openPopout, setOpenPopout] = useState<boolean>(false);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -86,6 +89,14 @@ export default function NewsProvider({ children }: NewsProviderProps) {
     return () => unsubscribe();
   }, [user]);
 
+  useEffect(() => {
+    if (openPopout) {
+      setTimeout(() => {
+        setOpenPopout(false);
+      }, 3000);
+    }
+  }, [openPopout]);
+
   if (loading || initializing)
     return (
       <div className="w-[100dvw] h-screen flex justify-center items-center">
@@ -108,6 +119,8 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setIsModalOpen,
         handleCloseModal,
         handleOpenModal,
+        openPopout,
+        setOpenPopout,
       }}
     >
       {children}
