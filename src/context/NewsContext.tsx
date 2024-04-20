@@ -1,45 +1,17 @@
 import { onAuthStateChanged, User } from "firebase/auth";
-import React, {
-  createContext,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 import { auth, db } from "../config/Firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+import PageLoading from "../components/PageLoading/PageLoading";
+import { NewsContextProps, NewsProviderProps, UserProps } from "./ContextType";
 
-export type UserProps = {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  age: string;
-  isAdmin: boolean;
-  completed: boolean;
-  inEditing: boolean;
-};
-
-type NewsContextProps = {
-  user: User | null;
-  setUser: React.Dispatch<SetStateAction<User | null>>;
-  currentUser: UserProps | null;
-  setCurrentUser: React.Dispatch<SetStateAction<UserProps | null>>;
-  loading: boolean;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-  initializing: boolean;
-  setInitializing: React.Dispatch<SetStateAction<boolean>>;
-  isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<SetStateAction<boolean>>;
-  handleCloseModal: () => void;
-  handleOpenModal: () => void;
-  openPopout: boolean;
-  setOpenPopout: React.Dispatch<SetStateAction<boolean>>;
-};
-
-type NewsProviderProps = {
-  children: React.ReactNode;
-};
+import {
+  handleOpenModal,
+  handleCloseModal,
+  handleOpenDropdown,
+  handleCloseDropdown,
+} from "./UIFunctios";
 
 export const NewsContext = createContext<NewsContextProps | null>(null);
 
@@ -50,14 +22,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [initializing, setInitializing] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openPopout, setOpenPopout] = useState<boolean>(false);
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -77,12 +42,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
       return;
     }
     const unsubscribe = onSnapshot(doc(db, "users", user.uid), (userData) => {
-      const userDataObj = userData.data();
-      if (userDataObj) {
-        setCurrentUser(userDataObj as UserProps);
-      } else {
-        setCurrentUser(null);
-      }
+      setCurrentUser(userData.data() ? (userData.data() as UserProps) : null);
       setInitializing(false);
     });
 
@@ -97,12 +57,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
     }
   }, [openPopout]);
 
-  if (loading || initializing)
-    return (
-      <div className="w-[100dvw] h-screen flex justify-center items-center">
-        Loading...
-      </div>
-    );
+  if (loading || initializing) return <PageLoading />;
 
   return (
     <NewsContext.Provider
@@ -117,10 +72,14 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setInitializing,
         isModalOpen,
         setIsModalOpen,
-        handleCloseModal,
-        handleOpenModal,
         openPopout,
         setOpenPopout,
+        openDropdown,
+        setOpenDropdown,
+        handleOpenModal: () => handleOpenModal(setIsModalOpen),
+        handleCloseModal: () => handleCloseModal(setIsModalOpen),
+        handleOpenDropdown: () => handleOpenDropdown(setOpenDropdown),
+        handleCloseDropdown: () => handleCloseDropdown(setOpenDropdown),
       }}
     >
       {children}

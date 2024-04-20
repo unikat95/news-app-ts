@@ -2,15 +2,11 @@ import React from "react";
 
 type ContainerProps = {
   children: React.ReactNode;
-  height: number;
 };
 
-export default function Container({ children, height }: ContainerProps) {
+export default function Container({ children }: ContainerProps) {
   return (
-    <div
-      className="w-full max-w-[1300px] min-h-[-webkit-fill-available] flex flex-col justify-center items-center gap-5 py-10"
-      style={{ paddingTop: `${height}px` }}
-    >
+    <div className="w-full max-w-[1300px] flex flex-col justify-center items-center py-20 md:py-36 px-5 xl:px-0 ">
       {children}
     </div>
   );

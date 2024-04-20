@@ -46,6 +46,7 @@ export default function Auth() {
           lastName: "",
           age: "--",
           isAdmin: false,
+          isOwner: false,
           completed: false,
           inEditing: false,
         };

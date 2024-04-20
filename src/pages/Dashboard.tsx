@@ -8,10 +8,15 @@ export default function Dashboard() {
   if (!currentUser?.isAdmin) return <Navigate to="/"></Navigate>;
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between p-5 md:p-0">
+    <div className="w-full h-screen flex flex-col justify-between p-5">
       <div> Welcome Admin {currentUser.firstName}</div>
       <div>
-        <Link to="/">Back</Link>
+        <Link
+          to="/"
+          className="border-2 border-black px-6 py-2 rounded-md text-black hover:bg-black hover:text-white transition-colors "
+        >
+          Back to homepage
+        </Link>
       </div>
     </div>
   );

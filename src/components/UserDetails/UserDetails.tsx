@@ -5,34 +5,28 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 
 import { MdEmail } from "react-icons/md";
 import { FaPen, FaUser } from "react-icons/fa";
-import { MdAddModerator } from "react-icons/md";
+import UserRank from "../UserRank/UserRank";
 
 export default function UserDetails() {
   const { currentUser } = useContext(NewsContext) || {};
   return (
-    <>
+    <div className="w-full flex flex-col justify-center items-center gap-2">
       <UserAvatar width="3em" height="3em" fontSize="4em" />
-      <div className="w-full grid lg:grid-cols-2 gap-2">
+      <UserRank />
+      <div className="w-full flex gap-x-3 gap-y-1">
         <UserDetail
-          name="First Name"
-          value={currentUser?.firstName}
+          name="Full Name"
+          value={currentUser?.firstName + " " + currentUser?.lastName}
           Icon={FaUser}
         />
-        <UserDetail
-          name="Last Name"
-          value={currentUser?.lastName}
-          Icon={FaUser}
-        />
-        <UserDetail name="Age" value={currentUser?.age} Icon={FaUser} />
+      </div>
+      <div className="w-full flex gap-x-3 gap-y-1">
         <UserDetail name="Email" value={currentUser?.email} Icon={MdEmail} />
-        <UserDetail
-          name="Rank"
-          value={currentUser?.isAdmin ? "Admin" : "User"}
-          Icon={FaUser}
-          IconAdmin={MdAddModerator}
-        />
+      </div>
+      <div className="w-full grid lg:grid-cols-2 gap-x-3 gap-y-1">
+        <UserDetail name="Age" value={currentUser?.age} Icon={FaUser} />
         <UserDetail name="Posts" value={"0"} Icon={FaPen} />
       </div>
-    </>
+    </div>
   );
 }

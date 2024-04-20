@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { NewsContext } from "../../context/NewsContext";
 
-type DropdownMenuProps = {
-  handleCloseDropdown: () => void;
-};
+export default function DropdownMenu() {
+  const { handleCloseDropdown } = useContext(NewsContext) || {};
 
-export default function DropdownMenu({
-  handleCloseDropdown,
-}: DropdownMenuProps) {
   return (
-    <div className="bg-white rounded-md absolute top-9 right-0 shadow-md">
+    <div className="bg-white rounded-md absolute top-12 right-0 shadow-md z-[9999]">
       <ul className="w-full h-full py-3 text-sm">
         <li className="flex">
           <Link

@@ -18,8 +18,8 @@ export default function UserDetail({
   const { currentUser } = useContext(NewsContext) || {};
 
   return (
-    <div className="w-full flex flex-col">
-      <div>{name}:</div>
+    <div className="w-full flex flex-col gap-1">
+      <div className="text-xs text-slate-500">{name}:</div>
       <div className="w-full bg-gray-100 flex justify-between items-center gap-2 rounded-md overflow-hidden">
         <div className="w-auto bg-gray-200 text-gray-400 p-3">
           {IconAdmin && currentUser?.isAdmin ? (
