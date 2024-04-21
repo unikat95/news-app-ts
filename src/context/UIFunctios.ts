@@ -7,9 +7,10 @@ export const handleCloseModal = (setIsModalOpen: (isOpen: boolean) => void) => {
 };
 
 export const handleOpenDropdown = (
-  setOpenDropdown: (isOpen: boolean) => void
+  setOpenDropdown: (isOpen: boolean) => void,
+  isOpen: boolean
 ) => {
-  setOpenDropdown(true);
+  setOpenDropdown(!isOpen);
 };
 
 export const handleCloseDropdown = (

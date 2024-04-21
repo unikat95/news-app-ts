@@ -2,7 +2,7 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 
 import { auth, db } from "../config/Firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 import PageLoading from "../components/PageLoading/PageLoading";
 import { NewsContextProps, NewsProviderProps, UserProps } from "./ContextType";
 
@@ -17,6 +17,7 @@ export const NewsContext = createContext<NewsContextProps | null>(null);
 
 export default function NewsProvider({ children }: NewsProviderProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [usersList, setUsersList] = useState<UserProps[]>([]);
   const [currentUser, setCurrentUser] = useState<UserProps | null>(null);
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
@@ -41,12 +42,26 @@ export default function NewsProvider({ children }: NewsProviderProps) {
     if (!user) {
       return;
     }
-    const unsubscribe = onSnapshot(doc(db, "users", user.uid), (userData) => {
-      setCurrentUser(userData.data() ? (userData.data() as UserProps) : null);
+    const userUnsubscribe = onSnapshot(
+      doc(db, "users", user.uid),
+      (userData) => {
+        setCurrentUser(userData.data() ? (userData.data() as UserProps) : null);
+      }
+    );
+
+    const userListUnsubscribe = onSnapshot(collection(db, "users"), (users) => {
+      const usersData: UserProps[] = [];
+      users.forEach((doc) => {
+        usersData.push(doc.data() as UserProps);
+      });
+      setUsersList(usersData);
       setInitializing(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      userUnsubscribe();
+      userListUnsubscribe;
+    };
   }, [user]);
 
   useEffect(() => {
@@ -78,8 +93,11 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setOpenDropdown,
         handleOpenModal: () => handleOpenModal(setIsModalOpen),
         handleCloseModal: () => handleCloseModal(setIsModalOpen),
-        handleOpenDropdown: () => handleOpenDropdown(setOpenDropdown),
+        handleOpenDropdown: () =>
+          handleOpenDropdown(setOpenDropdown, openDropdown),
         handleCloseDropdown: () => handleCloseDropdown(setOpenDropdown),
+        usersList,
+        setUsersList,
       }}
     >
       {children}

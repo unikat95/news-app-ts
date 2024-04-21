@@ -5,6 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { NewsContext } from "../../context/NewsContext";
 import DropdownMenu from "../DropdownMenu/DropdownMenu";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import CTAButton from "../CTAButton/CTAButton";
 
 type NavMenuProps = {
   open: boolean;
@@ -40,8 +41,8 @@ export default function NavMenu({ open, handleCloseMenu }: NavMenuProps) {
           />
           <li className="hidden md:flex">
             <button className="relative group" onClick={handleOpenDropdown}>
-              <UserAvatar width="3.6em" height="3.6em" fontSize="1em" />
-              <span className=" bg-white justify-center items-center absolute bottom-1 right-2 rounded-sm">
+              <UserAvatar user={currentUser} width="3.6em" height="3.6em" />
+              <span className=" bg-white justify-center items-center absolute bottom-0 right-2 rounded-sm">
                 <IoMdArrowDropdown
                   className={`${openDropdown && "rotate-180"}`}
                 />
@@ -51,13 +52,7 @@ export default function NavMenu({ open, handleCloseMenu }: NavMenuProps) {
           </li>
         </>
       )}
-      {!currentUser && (
-        <NavLinkItem
-          href="/auth"
-          name="Join Us!"
-          handleCloseMenu={handleCloseMenu}
-        />
-      )}
+      {!currentUser && <CTAButton />}
     </ul>
   );
 }

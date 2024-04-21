@@ -149,7 +149,7 @@ export default function Auth() {
 
   return (
     <>
-      <div className="w-[100dvw] h-[100dvh] absolute top-0 left-0 bg-white md:bg-gradient-to-tr md:from-blue-300 md:to-red-300 flex flex-col justify-center items-center gap-5">
+      <div className="w-[100dvw] h-[100dvh] absolute top-0 left-0 bg-white md:bg-gradient-to-tr md:from-blue-300 md:to-red-100 flex flex-col justify-center items-center gap-5">
         <form className="w-full sm:w-[50%] lg:w-[40%] xl:w-[27%] flex md:bg-white flex-col justify-center items-center gap-7 px-5 md:p-8 rounded-md">
           {loading && <div className="sign-loading"></div>}
           <h1 className="inline-flex uppercase text-2xl pb-10 text-gray-500 relative after:absolute after:w-full after:h-[2px] after:bg-purple-600 after:bottom-8 after:left-0">

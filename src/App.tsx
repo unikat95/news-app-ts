@@ -14,6 +14,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Articles from "./pages/Articles";
 import Users from "./pages/Users";
+import User from "./pages/User";
 
 function App() {
   const router = createBrowserRouter(
@@ -21,7 +22,8 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/articles" element={<Articles />} />
-        <Route path="/users" element={<Users />}></Route>
+        <Route path="/users" element={<Users />} />
+        <Route path="/users/user/:id" element={<User />} />
 
         <Route
           path="/profile"

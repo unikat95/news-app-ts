@@ -1,27 +1,37 @@
-import React, { useContext } from "react";
-import { NewsContext } from "../../context/NewsContext";
+import React from "react";
+import { UserProps } from "../../context/ContextType";
 
 type UserAvatarProps = {
+  user: UserProps | null;
   width: string;
   height: string;
-  fontSize: string;
+  fontSize?: string;
 };
 
 export default function UserAvatar({
+  user,
   width,
   height,
   fontSize,
 }: UserAvatarProps) {
-  const { currentUser } = useContext(NewsContext) || {};
   return (
     <>
-      <div
-        className="bg-lime-400 bg-center bg-cover border-8 border-slate-50 rounded-full flex justify-center items-center font-bold text-white shadow-sm"
-        style={{ width: width, height: height, fontSize: fontSize }}
-      >
-        {currentUser?.firstName.slice(0, 1).toUpperCase()}
-        {currentUser?.lastName.slice(0, 1).toUpperCase()}
-      </div>
+      {user?.avatar ? (
+        <div
+          className="bg-gray-500 bg-center bg-cover border-8 border-slate-50 rounded-full flex justify-center items-center font-bold text-white shadow-sm overflow-hidden"
+          style={{ width: width, height: height, fontSize: fontSize }}
+        >
+          <img src={user.avatar} />
+        </div>
+      ) : (
+        <div
+          className="bg-gray-500 bg-center bg-cover border-8 border-slate-50 rounded-full flex justify-center items-center font-bold text-white shadow-sm"
+          style={{ width: width, height: height, fontSize: fontSize }}
+        >
+          {user?.firstName.slice(0, 1).toUpperCase()}
+          {user?.lastName.slice(0, 1).toUpperCase()}
+        </div>
+      )}
     </>
   );
 }

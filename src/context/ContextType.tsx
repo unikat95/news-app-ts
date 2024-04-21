@@ -25,14 +25,16 @@ export type NewsContextProps = {
   setInitializing: React.Dispatch<SetStateAction<boolean>>;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<SetStateAction<boolean>>;
-  handleCloseModal: () => void;
-  handleOpenModal: () => void;
   openPopout: boolean;
   setOpenPopout: React.Dispatch<SetStateAction<boolean>>;
   openDropdown: boolean;
   setOpenDropdown: React.Dispatch<SetStateAction<boolean>>;
+  handleCloseModal: () => void;
+  handleOpenModal: () => void;
   handleOpenDropdown: () => void;
   handleCloseDropdown: () => void;
+  usersList: UserProps[];
+  setUsersList: React.Dispatch<SetStateAction<UserProps[]>>;
 };
 
 export type NewsProviderProps = {

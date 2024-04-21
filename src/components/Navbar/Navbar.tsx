@@ -32,7 +32,7 @@ export default function Navbar() {
         scroll
           ? "bg-white shadow-sm md:py-2"
           : "bg-transparent shadow-none md:py-8"
-      } flex justify-center items-center fixed top-0 p-5 transition-[background,_padding] duration-300`}
+      } flex justify-center items-center fixed top-0 p-5 transition-[background,_padding] duration-300 z-[9999]`}
     >
       <div className="max-w-[1300px] w-full h-auto flex justify-between items-center">
         <Logo />

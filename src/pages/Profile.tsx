@@ -32,15 +32,20 @@ export default function Profile() {
   };
 
   return (
-    <Container>
-      <PopoutMsg message="User information successfully saved" />
-      <div className="w-full flex flex-col lg:flex-row gap-10 justify-start items-start">
-        <UserProfile
-          handleEditProfile={handleEditProfile}
-          handleSignOut={handleSignOut}
-        />
-        <UserArticles />
-      </div>
-    </Container>
+    <>
+      {currentUser && (
+        <Container>
+          <PopoutMsg message="User information successfully saved" />
+          <div className="w-full flex flex-col lg:flex-row gap-10 justify-start items-start">
+            <UserProfile
+              user={currentUser}
+              handleEditProfile={handleEditProfile}
+              handleSignOut={handleSignOut}
+            />
+            <UserArticles />
+          </div>
+        </Container>
+      )}
+    </>
   );
 }
