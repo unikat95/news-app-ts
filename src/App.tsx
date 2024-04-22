@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Articles from "./pages/Articles";
 import Users from "./pages/Users";
 import User from "./pages/User";
+import Article from "./pages/Article";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,6 +23,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/:id" element={<Article />} />
         <Route path="/users" element={<Users />} />
         <Route path="/users/user/:id" element={<User />} />
 

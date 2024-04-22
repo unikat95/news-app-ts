@@ -8,9 +8,10 @@ type PopoutMsgProps = {
 
 export default function PopoutMsg({ message }: PopoutMsgProps) {
   const { openPopout } = useContext(NewsContext) || {};
+
   return (
     <div
-      className={`w-auto h-auto bg-green-500 text-white flex justify-between items-center fixed rounded-md text-sm overflow-hidden top-3 left-[50%] translate-x-[-50%] z-[999] duration-500 ${
+      className={`w-auto h-auto bg-green-500 text-white flex justify-between items-center fixed rounded-md text-sm overflow-hidden top-3 left-[50%] translate-x-[-50%] z-[99999] duration-500 ${
         openPopout ? "translate-y-[10%]" : "translate-y-[-150%]"
       }`}
     >

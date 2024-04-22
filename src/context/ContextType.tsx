@@ -14,6 +14,16 @@ export type UserProps = {
   inEditing: boolean;
 };
 
+export type ArticleProps = {
+  id: string;
+  author: string;
+  image: string;
+  text: string;
+  title: string;
+  createdAt: Date;
+  key: string;
+};
+
 export type NewsContextProps = {
   user: User | null;
   setUser: React.Dispatch<SetStateAction<User | null>>;
@@ -35,6 +45,8 @@ export type NewsContextProps = {
   handleCloseDropdown: () => void;
   usersList: UserProps[];
   setUsersList: React.Dispatch<SetStateAction<UserProps[]>>;
+  articles: ArticleProps[];
+  setArticles: React.Dispatch<SetStateAction<ArticleProps[]>>;
 };
 
 export type NewsProviderProps = {

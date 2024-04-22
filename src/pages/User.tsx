@@ -11,16 +11,16 @@ export default function User() {
 
   const user = usersList?.find((user) => user.id === id);
 
+  if (!user) return;
+
   return (
     <>
-      {user && (
-        <Container>
-          <div className="w-full flex flex-col lg:flex-row gap-10 justify-start items-start">
-            <UserProfile user={user} />
-            <UserArticles />
-          </div>
-        </Container>
-      )}
+      <Container>
+        <div className="w-full flex flex-col lg:flex-row gap-5 justify-start items-start">
+          <UserProfile user={user} />
+          <UserArticles user={user} />
+        </div>
+      </Container>
     </>
   );
 }

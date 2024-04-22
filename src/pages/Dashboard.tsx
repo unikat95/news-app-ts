@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { NewsContext } from "../context/NewsContext";
 import { Link, Navigate } from "react-router-dom";
+import CreateArticle from "../components/Dashboard/CreateArticle";
 
 export default function Dashboard() {
   const { currentUser } = useContext(NewsContext) || {};
@@ -8,15 +9,12 @@ export default function Dashboard() {
   if (!currentUser?.isAdmin) return <Navigate to="/"></Navigate>;
 
   return (
-    <div className="w-full h-screen flex flex-col justify-between p-5">
-      <div> Welcome Admin {currentUser.firstName}</div>
+    <div className="w-full h-screen flex flex-col p-5 gap-10">
       <div>
-        <Link
-          to="/"
-          className="border-2 border-black px-6 py-2 rounded-md text-black hover:bg-black hover:text-white transition-colors "
-        >
-          Back to homepage
-        </Link>
+        Welcome {currentUser.firstName}, back to <Link to="/">Homepage</Link>
+      </div>
+      <div>
+        <CreateArticle user={currentUser} />
       </div>
     </div>
   );

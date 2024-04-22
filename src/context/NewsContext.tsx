@@ -4,7 +4,12 @@ import React, { createContext, useEffect, useState } from "react";
 import { auth, db } from "../config/Firebase";
 import { collection, doc, onSnapshot } from "firebase/firestore";
 import PageLoading from "../components/PageLoading/PageLoading";
-import { NewsContextProps, NewsProviderProps, UserProps } from "./ContextType";
+import {
+  ArticleProps,
+  NewsContextProps,
+  NewsProviderProps,
+  UserProps,
+} from "./ContextType";
 
 import {
   handleOpenModal,
@@ -19,6 +24,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [usersList, setUsersList] = useState<UserProps[]>([]);
   const [currentUser, setCurrentUser] = useState<UserProps | null>(null);
+  const [articles, setArticles] = useState<ArticleProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,20 +55,37 @@ export default function NewsProvider({ children }: NewsProviderProps) {
       }
     );
 
+    return () => {
+      userUnsubscribe();
+    };
+  }, [user]);
+
+  useEffect(() => {
     const userListUnsubscribe = onSnapshot(collection(db, "users"), (users) => {
       const usersData: UserProps[] = [];
       users.forEach((doc) => {
         usersData.push(doc.data() as UserProps);
       });
       setUsersList(usersData);
-      setInitializing(false);
     });
 
+    const articlesListUnsubscribe = onSnapshot(
+      collection(db, "articles"),
+      (articles) => {
+        const articlesData: ArticleProps[] = [];
+        articles.forEach((article) => {
+          articlesData.push(article.data() as ArticleProps);
+        });
+        setArticles(articlesData);
+        setInitializing(false);
+      }
+    );
+
     return () => {
-      userUnsubscribe();
-      userListUnsubscribe;
+      userListUnsubscribe();
+      articlesListUnsubscribe();
     };
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     if (openPopout) {
@@ -98,6 +121,8 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         handleCloseDropdown: () => handleCloseDropdown(setOpenDropdown),
         usersList,
         setUsersList,
+        articles,
+        setArticles,
       }}
     >
       {children}

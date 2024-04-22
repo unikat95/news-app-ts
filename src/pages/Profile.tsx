@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { NewsContext } from "../context/NewsContext";
 import { signOut } from "firebase/auth";
@@ -31,18 +31,26 @@ export default function Profile() {
     }
   };
 
+  useEffect(() => {
+    if (currentUser?.inEditing) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [currentUser?.inEditing]);
+
   return (
     <>
       {currentUser && (
         <Container>
           <PopoutMsg message="User information successfully saved" />
-          <div className="w-full flex flex-col lg:flex-row gap-10 justify-start items-start">
+          <div className="w-full flex flex-col lg:flex-row gap-5 justify-start items-start">
             <UserProfile
               user={currentUser}
               handleEditProfile={handleEditProfile}
               handleSignOut={handleSignOut}
             />
-            <UserArticles />
+            <UserArticles user={currentUser} />
           </div>
         </Container>
       )}
