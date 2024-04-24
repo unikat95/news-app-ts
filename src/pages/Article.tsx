@@ -6,7 +6,7 @@ import UserAvatar from "../components/UserAvatar/UserAvatar";
 import ArticleImage from "../components/ArticleImage/ArticleImage";
 
 export default function Article() {
-  const { articles, usersList } = useContext(NewsContext) || {};
+  const { currentUser, articles, usersList } = useContext(NewsContext) || {};
   const { id } = useParams();
 
   const article = articles?.find((art) => art.id === id);
@@ -19,7 +19,11 @@ export default function Article() {
       <Container>
         <div className="w-full max-w-[1300px] flex flex-col justify-center items-center lg:p-5 xl:p-0 gap-10">
           <Link
-            to={`/users/user/${author?.id}`}
+            to={`${
+              currentUser?.id === author.id
+                ? "/profile"
+                : `/users/user/${author?.id}`
+            }`}
             className="w-auto flex flex-col justify-center items-center group hover:brightness-110"
           >
             <UserAvatar user={author} width="4em" height="4em" />

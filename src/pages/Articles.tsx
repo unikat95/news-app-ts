@@ -8,12 +8,13 @@ import { FaUser } from "react-icons/fa";
 import { BiLinkExternal } from "react-icons/bi";
 
 export default function Articles() {
-  const { articles, usersList } = useContext(NewsContext) || {};
+  const { currentUser, sortedArticles, usersList } =
+    useContext(NewsContext) || {};
 
   return (
     <Container>
       <div className="w-full flex flex-col justify-start items-start xl:p-0 gap-5">
-        {articles?.map((article) => {
+        {sortedArticles?.map((article) => {
           const author = usersList?.find((user) => user.id === article.author);
           return (
             <div
@@ -54,7 +55,11 @@ export default function Articles() {
                       <span> Author:</span>
                     </div>
                     <Link
-                      to={`/users/user/${article.author}`}
+                      to={`${
+                        currentUser?.id === article.author
+                          ? "/profile"
+                          : `/users/user/${article.author}`
+                      }`}
                       className="text-slate-700 hover:underline"
                     >
                       {author?.firstName} {author?.lastName}

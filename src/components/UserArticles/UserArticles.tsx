@@ -8,9 +8,9 @@ type UserArticlesProps = {
 };
 
 export default function UserArticles({ user }: UserArticlesProps) {
-  const { articles } = useContext(NewsContext) || {};
+  const { sortedArticles } = useContext(NewsContext) || {};
 
-  const userArticles = articles?.filter(
+  const userArticles = sortedArticles?.filter(
     (article) => article.author === user?.id
   );
 

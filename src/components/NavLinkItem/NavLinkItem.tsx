@@ -5,15 +5,17 @@ type NavLinkItemProps = {
   href: string;
   handleCloseMenu: () => void;
   name: string;
+  hidden?: string;
 };
 
 export default function NavLinkItem({
   href,
   handleCloseMenu,
   name,
+  hidden,
 }: NavLinkItemProps) {
   return (
-    <li className={`${name === "Profile" && "md:hidden flex"}`}>
+    <li className={`${name === "Profile" && "md:hidden flex"} ${hidden}`}>
       <NavLink
         to={href}
         onClick={handleCloseMenu}

@@ -52,6 +52,14 @@ export default function NavMenu({ open, handleCloseMenu }: NavMenuProps) {
           </li>
         </>
       )}
+      {currentUser?.isAdmin && (
+        <NavLinkItem
+          href="/dashboard"
+          name="Dashboard"
+          handleCloseMenu={handleCloseMenu}
+          hidden="md:hidden"
+        />
+      )}
       {!currentUser && <CTAButton />}
     </ul>
   );

@@ -21,10 +21,5 @@ export const footerQuickLinks = [
 export function getLatestArticles(articles: ArticleProps[]) {
   if (!articles || !Array.isArray(articles)) return [];
 
-  return articles
-    .sort(
-      (a, b) =>
-        new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate()
-    )
-    .slice(0, 3);
+  return articles;
 }

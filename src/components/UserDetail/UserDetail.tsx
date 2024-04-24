@@ -4,7 +4,7 @@ import { NewsContext } from "../../context/NewsContext";
 
 type UserDetailProps = {
   name: string;
-  value: string | undefined;
+  value: number | string | undefined;
   Icon: IconType;
   IconAdmin?: IconType | undefined;
 };

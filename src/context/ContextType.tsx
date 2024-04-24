@@ -47,6 +47,7 @@ export type NewsContextProps = {
   setUsersList: React.Dispatch<SetStateAction<UserProps[]>>;
   articles: ArticleProps[];
   setArticles: React.Dispatch<SetStateAction<ArticleProps[]>>;
+  sortedArticles: ArticleProps[];
 };
 
 export type NewsProviderProps = {

@@ -30,14 +30,13 @@ export default function EditProfile({ user }: EditProfileProps) {
     }));
   };
 
-  const handleSave = () => {
+  const handleSave = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     setSaveData(true);
     setLoading(true);
   };
 
-  const handleApplyChanges = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-
+  const handleApplyChanges = async () => {
     if (Object.values(formData).some((value) => value === "")) return;
 
     if (currentUser) {
@@ -66,7 +65,7 @@ export default function EditProfile({ user }: EditProfileProps) {
   useEffect(() => {
     if (saveData) {
       setTimeout(() => {
-        handleApplyChanges({ preventDefault: () => {} });
+        handleApplyChanges();
         setLoading(false);
       }, 750);
     }
@@ -99,7 +98,7 @@ export default function EditProfile({ user }: EditProfileProps) {
           <h1 className="flex justify-center items-center text-2xl font-medium">
             User detail
           </h1>
-          <form className="w-full flex flex-col gap-7">
+          <form className="w-full flex flex-col gap-7" onSubmit={handleSave}>
             <div className="w-full flex flex-col gap-4 relative">
               <EditProfileInput
                 name="First name"
@@ -129,11 +128,7 @@ export default function EditProfile({ user }: EditProfileProps) {
               )}
             </div>
             <div className="flex justify-end items-center gap-2">
-              <button
-                type="button"
-                className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-md"
-                onClick={handleSave}
-              >
+              <button className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-md">
                 Save
               </button>
               {currentUser?.completed && (

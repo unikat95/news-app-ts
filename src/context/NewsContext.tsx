@@ -31,13 +31,17 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [openPopout, setOpenPopout] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
 
+  const sortedArticles = articles.sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
       if (!user) {
-        setInitializing(false);
+        setLoading(false);
       }
     });
 
@@ -123,6 +127,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setUsersList,
         articles,
         setArticles,
+        sortedArticles,
       }}
     >
       {children}

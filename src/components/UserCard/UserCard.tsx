@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { NewsContext } from "../../context/NewsContext";
 
 type UserCardProps = {
   id: string;
@@ -16,9 +17,10 @@ export default function UserCard({
   lastName,
   rank,
 }: UserCardProps) {
+  const { currentUser } = useContext(NewsContext) || {};
   return (
     <Link
-      to={`/users/user/${id}`}
+      to={`${currentUser?.id === id ? "/profile" : `/users/user/${id}`}`}
       className="w-full h-full bg-white hover:bg-slate-50 flex flex-col justify-center items-center rounded-md shadow-sm p-10 gap-5"
     >
       {avatar ? (

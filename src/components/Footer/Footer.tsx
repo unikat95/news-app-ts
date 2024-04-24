@@ -10,11 +10,11 @@ import FooterNav from "../FooterNav/FooterNav";
 import FooterSocialMedia from "../FooterSocialMedia/FooterSocialMedia";
 
 export default function Footer() {
-  const { articles } = useContext(NewsContext) || {};
+  const { sortedArticles } = useContext(NewsContext) || {};
 
-  if (!articles) return;
+  if (!sortedArticles) return;
 
-  const latestArticles = getLatestArticles(articles);
+  const latestArticles = getLatestArticles(sortedArticles);
 
   return (
     <div className="w-full h-auto flex flex-col justify-center items-center bg-slate-900 text-white text-sm relative bottom-0 ">
