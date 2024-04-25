@@ -16,6 +16,8 @@ import {
   handleCloseModal,
   handleOpenDropdown,
   handleCloseDropdown,
+  handleSignOut,
+  handleEditProfile,
 } from "./UIFunctios";
 
 export const NewsContext = createContext<NewsContextProps | null>(null);
@@ -123,6 +125,9 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         handleOpenDropdown: () =>
           handleOpenDropdown(setOpenDropdown, openDropdown),
         handleCloseDropdown: () => handleCloseDropdown(setOpenDropdown),
+        handleSignOut: () =>
+          handleSignOut(setUser, setCurrentUser, setOpenDropdown, setLoading),
+        handleEditProfile: () => handleEditProfile(currentUser),
         usersList,
         setUsersList,
         articles,

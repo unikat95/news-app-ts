@@ -12,7 +12,9 @@ export default function DisabledNavbar({
 }: DisabledNavbarProps) {
   const location = useLocation();
 
-  const isNotAllowedPath = paths.some((path) => location.pathname === path);
+  const isNotAllowedPath = paths.some((path) =>
+    location.pathname.startsWith(path)
+  );
 
   if (isNotAllowedPath) return null;
 

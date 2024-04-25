@@ -1,12 +1,19 @@
 import React from "react";
-import Container from "../components/Container/Container";
+import LatestArticles from "../components/LatestArticles/LatestArticles";
+import Articles from "./Articles";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <Container>
-      <div className="w-full flex flex-col justify-start items-start p-5 xl:p-0">
-        Home
+    <div className="flex flex-col gap-20">
+      <LatestArticles />
+      <div className="flex flex-col justify-center items-start gap-10">
+        <h1 className="text-3xl text-slate-700 font-medium">Other articles:</h1>
+        <Articles slice={5} />
+        <Link to="/articles" className="w-full text-lg underline text-center">
+          See all articles...
+        </Link>
       </div>
-    </Container>
+    </div>
   );
 }

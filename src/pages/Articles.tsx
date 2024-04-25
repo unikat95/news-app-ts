@@ -1,20 +1,34 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
-import Container from "../components/Container/Container";
 import { NewsContext } from "../context/NewsContext";
 import { Link } from "react-router-dom";
 
 import { FaUser } from "react-icons/fa";
 import { BiLinkExternal } from "react-icons/bi";
 
-export default function Articles() {
+type ArticlesType = {
+  slice?: number;
+};
+
+export default function Articles({ slice }: ArticlesType) {
   const { currentUser, sortedArticles, usersList } =
     useContext(NewsContext) || {};
 
+  const [imageLoadedStates, setImageLoadedStates] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const setImageLoaded = (articleId: string, loaded: boolean) => {
+    setImageLoadedStates((prev) => ({
+      ...prev,
+      [articleId]: loaded,
+    }));
+  };
+
   return (
-    <Container>
-      <div className="w-full flex flex-col justify-start items-start xl:p-0 gap-5">
-        {sortedArticles?.map((article) => {
+    <>
+      {sortedArticles
+        ?.map((article) => {
           const author = usersList?.find((user) => user.id === article.author);
           return (
             <div
@@ -25,10 +39,14 @@ export default function Articles() {
                 to={`/articles/${article.id}`}
                 className="w-full h-full overflow-hidden rounded-lg"
               >
+                {!imageLoadedStates[article.id] && (
+                  <div className="w-full h-full bg-gray-400 animate-pulse rounded-xl"></div>
+                )}
                 <img
                   src={article.image}
                   alt=""
-                  className="w-full md:max-w-[19rem] h-full min-h-[10rem] max-h-[10rem] md:min-h-[14rem] md:max-h-[14rem] object-cover group-hover:scale-[1.1] group-hover:rotate-3 duration-300 rounded-lg"
+                  className="w-full md:max-w-[19rem] h-full min-h-[10rem] max-h-[10rem] md:min-h-[14rem] md:max-h-[14rem] object-cover group-hover:scale-110 group-hover:rotate-2 duration-200 rounded-lg"
+                  onLoad={() => setImageLoaded(article.id, true)}
                 />
               </Link>
               <div className="w-full flex flex-col justify-between items-start gap-3 md:gap-0">
@@ -75,8 +93,8 @@ export default function Articles() {
               </div>
             </div>
           );
-        })}
-      </div>
-    </Container>
+        })
+        .slice(0, slice)}
+    </>
   );
 }

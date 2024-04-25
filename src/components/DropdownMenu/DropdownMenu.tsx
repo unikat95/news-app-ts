@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { NewsContext } from "../../context/NewsContext";
 
 export default function DropdownMenu() {
-  const { handleCloseDropdown } = useContext(NewsContext) || {};
+  const { handleCloseDropdown, handleSignOut } = useContext(NewsContext) || {};
 
   return (
     <div className="bg-white rounded-md absolute top-12 right-0 shadow-md z-[9999]">
@@ -39,7 +39,7 @@ export default function DropdownMenu() {
           <Link
             to=""
             className="w-full px-6 py-2 border-y hover:bg-slate-900 hover:text-white"
-            onClick={handleCloseDropdown}
+            onClick={handleSignOut}
           >
             Logout
           </Link>

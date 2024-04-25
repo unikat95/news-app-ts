@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 type UserProfileProps = {
   user: UserProps | null;
   handleEditProfile?: () => Promise<void>;
-  handleSignOut?: () => Promise<void>;
+  handleSignOut?: (() => Promise<void>) | undefined;
 };
 
 export default function UserProfile({

@@ -1,16 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
-import { UserProps } from "../../context/ContextType";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../config/Firebase";
+import { NewsContext } from "../../context/NewsContext";
 
-type CreateArticleProps = {
-  user: UserProps | null;
-};
-
-export default function CreateArticle({ user }: CreateArticleProps) {
+export default function CreateArticle() {
+  const { currentUser } = useContext(NewsContext) || {};
   const [title, setTitle] = useState<string>("");
   const [text, setText] = useState<string>("");
   const [image, setImage] = useState<string>("");
@@ -24,7 +21,7 @@ export default function CreateArticle({ user }: CreateArticleProps) {
 
     const articleData = {
       id: artId,
-      author: user?.id,
+      author: currentUser?.id,
       title: title,
       text: text,
       image: image,
@@ -50,7 +47,7 @@ export default function CreateArticle({ user }: CreateArticleProps) {
   };
 
   return (
-    <div className="w-full md:w-2/4 bg-white p-10 rounded-md">
+    <div className="w-full md:w-2/4 h-auto bg-white p-10 rounded-md">
       <form className="w-full flex flex-col gap-3">
         <label htmlFor="title">
           <p className="text-sm">Title: </p>

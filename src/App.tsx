@@ -16,6 +16,7 @@ import Articles from "./pages/Articles";
 import Users from "./pages/Users";
 import User from "./pages/User";
 import Article from "./pages/Article";
+import CreateArticle from "./components/Dashboard/CreateArticle";
 
 function App() {
   const router = createBrowserRouter(
@@ -35,7 +36,9 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="create-article" element={<CreateArticle />} />
+        </Route>
         <Route path="/auth" element={<Auth />} />
       </Route>
     )
