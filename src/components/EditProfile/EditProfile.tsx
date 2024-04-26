@@ -92,7 +92,7 @@ export default function EditProfile({ user }: EditProfileProps) {
         onClick={handleCancelChanges}
       >
         <div
-          className="w-full max-w-[90%] sm:max-w-[60%] lg:max-w-[40%] xl:max-w-[25%] flex flex-col gap-6 bg-white p-6 rounded-xl modal-anim"
+          className="w-full max-w-[90%] sm:max-w-[60%] lg:max-w-[40%] xl:max-w-[25%] h-auto flex flex-col gap-6 bg-white p-6 rounded-xl modal-anim"
           onClick={handleContentClick}
         >
           <h1 className="flex justify-center items-center text-2xl font-medium">

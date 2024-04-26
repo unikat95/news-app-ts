@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 
 import { FaUser } from "react-icons/fa";
 import { BiLinkExternal } from "react-icons/bi";
+import HTMLReactParser from "html-react-parser/lib/index";
 
 type ArticlesType = {
   slice?: number;
 };
 
 export default function Articles({ slice }: ArticlesType) {
-  const { currentUser, sortedArticles, usersList } =
+  const { currentUser, sortedArticles, usersList, removeStyles } =
     useContext(NewsContext) || {};
 
   const [imageLoadedStates, setImageLoadedStates] = useState<{
@@ -24,6 +25,8 @@ export default function Articles({ slice }: ArticlesType) {
       [articleId]: loaded,
     }));
   };
+
+  if (!removeStyles) return;
 
   return (
     <>
@@ -62,7 +65,9 @@ export default function Articles({ slice }: ArticlesType) {
                   </Link>
                   <p className="text-slate-600">
                     {article.text.length > 300
-                      ? article.text.slice(0, 300) + "..."
+                      ? HTMLReactParser(
+                          removeStyles(article.text.slice(0, 300) + "...")
+                        )
                       : article.text}
                   </p>
                 </div>

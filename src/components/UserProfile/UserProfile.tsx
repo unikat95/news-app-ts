@@ -28,7 +28,7 @@ export default function UserProfile({
     <div className="w-full lg:w-2/3 flex flex-col gap-5 xl:p-0">
       <h1 className="hidden md:block">User information:</h1>
       <div className="w-full bg-white flex justify-center items-center rounded-lg shadow-sm relative">
-        <div className="w-full flex flex-col justify-center items-center gap-7 p-3 md:p-7">
+        <div className="w-full flex flex-col justify-center items-center gap-3 md:gap-7 p-3 md:p-7">
           <UserDetails user={user} />
           {location.pathname === "/profile" && (
             <div className="w-full flex flex-wrap sm:flex-nowrap justify-end items-end gap-3">

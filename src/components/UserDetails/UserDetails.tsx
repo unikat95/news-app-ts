@@ -18,7 +18,7 @@ export default function UserDetails({ user }: UserDetailsProps) {
   const userArticles = articles?.filter((art) => art.author === user?.id);
 
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-2">
+    <div className="w-full flex flex-col justify-center items-center gap-2 mt-2 md:mt-0">
       <UserAvatar user={user} width="3em" height="3em" fontSize="4em" />
       <UserRank user={user} />
       <div className="w-full flex gap-x-3 gap-y-1">

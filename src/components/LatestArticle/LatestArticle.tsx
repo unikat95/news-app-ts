@@ -3,13 +3,14 @@ import { ArticleProps } from "../../context/ContextType";
 import { NewsContext } from "../../context/NewsContext";
 import AuthorCard from "../AuthorCard/AuthorCard";
 import { Link } from "react-router-dom";
+import HTMLReactParser from "html-react-parser/lib/index";
 
 type LatestArticleProps = {
   article: ArticleProps;
 };
 
 export default function LatestArticle({ article }: LatestArticleProps) {
-  const { usersList } = useContext(NewsContext) || {};
+  const { usersList, removeStyles } = useContext(NewsContext) || {};
   const author = usersList?.find((user) => user.id === article.author);
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
@@ -18,6 +19,8 @@ export default function LatestArticle({ article }: LatestArticleProps) {
     image.src = article?.image || "";
     image.onload = () => setImageLoaded(true);
   }, [article]);
+
+  if (!removeStyles) return;
 
   return (
     <div className="w-full h-full flex flex-col gap-5">
@@ -49,9 +52,9 @@ export default function LatestArticle({ article }: LatestArticleProps) {
       </div>
       <div className="w-full h-full flex flex-col justify-between items-start gap-5">
         <p className="text-slate-600">
-          {article.text.length > 140
-            ? article.text.slice(0, 140) + "..."
-            : article.text}
+          {article.text.length > 200
+            ? HTMLReactParser(removeStyles(article.text.slice(0, 200) + "..."))
+            : HTMLReactParser(removeStyles(article.text))}
         </p>
         <div>{author && <AuthorCard author={author} />}</div>
       </div>

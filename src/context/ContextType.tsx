@@ -51,6 +51,12 @@ export type NewsContextProps = {
   handleCloseDropdown: () => void;
   handleSignOut: (() => Promise<void>) | undefined;
   handleEditProfile: (() => Promise<void>) | undefined;
+  handleOpenMenu: (() => void) | undefined;
+  handleCloseMenu: (() => void) | undefined;
+  removeStyles: (html: string) => string;
+
+  openMenu: boolean;
+  setOpenMenu: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export type NewsProviderProps = {

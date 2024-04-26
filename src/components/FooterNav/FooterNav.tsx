@@ -20,7 +20,7 @@ export default function FooterNav({
 }: FooterNavProps) {
   return (
     <nav
-      className={`${border} ${padding} border-slate-800 w-auto flex flex-col  gap-4`}
+      className={`${border} ${padding} border-zinc-800 w-auto flex flex-col  gap-4`}
     >
       <h2 className="text-base text-slate-200">{text}</h2>
       <ul className="w-full flex flex-col gap-1 list-disc ml-4">

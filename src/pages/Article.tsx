@@ -5,6 +5,7 @@ import { NewsContext } from "../context/NewsContext";
 
 import ArticleImage from "../components/ArticleImage/ArticleImage";
 import AuthorCard from "../components/AuthorCard/AuthorCard";
+import HTMLReactParser from "html-react-parser/lib/index";
 
 export default function Article() {
   const { articles, usersList } = useContext(NewsContext) || {};
@@ -28,7 +29,9 @@ export default function Article() {
           </h1>
         </div>
         <ArticleImage article={article} />
-        <div>{article?.text}</div>
+        <div className="text-base md:text-lg text-slate-600 text-justify">
+          {HTMLReactParser(article?.text)}
+        </div>
       </div>
     </>
   );

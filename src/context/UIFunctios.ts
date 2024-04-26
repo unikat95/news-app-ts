@@ -51,3 +51,20 @@ export const handleEditProfile = async (currentUser: UserProps | null) => {
     });
   }
 };
+
+export const handleOpenMenu = (
+  open: boolean,
+  setOpen: React.Dispatch<SetStateAction<boolean>>
+) => {
+  setOpen(!open);
+};
+
+export const handleCloseMenu = (
+  setOpen: React.Dispatch<SetStateAction<boolean>>
+) => {
+  setOpen(false);
+};
+
+export const removeStyles = (html: string): string => {
+  return html.replace(/(<([^>]+)>)/gi, "");
+};

@@ -6,7 +6,7 @@ export default function DropdownMenu() {
   const { handleCloseDropdown, handleSignOut } = useContext(NewsContext) || {};
 
   return (
-    <div className="bg-white rounded-md absolute top-12 right-0 shadow-md z-[9999]">
+    <div className="bg-white rounded-md absolute top-[3.3rem] right-0 shadow-md z-[9999]">
       <ul className="w-full h-full py-3 text-sm">
         <li className="flex">
           <Link
@@ -28,11 +28,11 @@ export default function DropdownMenu() {
         </li>
         <li className="flex">
           <Link
-            to="/dashboard"
+            to="/admin-panel"
             className="w-full px-6 py-2 border-t hover:bg-zinc-50"
             onClick={handleCloseDropdown}
           >
-            Dashboard
+            Admin Panel
           </Link>
         </li>
         <li className="flex">

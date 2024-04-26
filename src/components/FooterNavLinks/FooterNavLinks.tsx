@@ -21,5 +21,5 @@ export const footerQuickLinks = [
 export function getLatestArticles(articles: ArticleProps[]) {
   if (!articles || !Array.isArray(articles)) return [];
 
-  return articles;
+  return articles.slice(0, 3);
 }

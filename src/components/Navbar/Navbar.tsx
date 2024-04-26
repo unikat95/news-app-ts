@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import Logo from "../Logo/Logo";
 
 import NavMenu from "../NavMenu/NavMenu";
+import { NewsContext } from "../../context/NewsContext";
 
 export default function Navbar() {
-  const [open, setOpen] = useState<boolean>(false);
+  const { openMenu, handleOpenMenu } = useContext(NewsContext) || {};
   const [scroll, setScroll] = useState<boolean>(false);
 
-  const handleOpenMenu = () => {
-    setOpen(!open);
-  };
-
-  const handleCLoseMenu = () => {
-    setOpen(false);
-  };
-
-  if (open) {
+  if (openMenu) {
     document.body.style.overflow = "hidden";
   } else {
     document.body.style.overflow = "auto";
@@ -36,9 +29,9 @@ export default function Navbar() {
     >
       <div className="max-w-[1300px] w-full h-auto flex justify-between items-center">
         <Logo />
-        <NavMenu open={open} handleCloseMenu={handleCLoseMenu} />
+        <NavMenu />
         <button
-          className={`md:hidden flex hamburger-menu ${open && "active"}`}
+          className={`md:hidden flex hamburger-menu ${openMenu && "active"}`}
           onClick={handleOpenMenu}
         ></button>
       </div>

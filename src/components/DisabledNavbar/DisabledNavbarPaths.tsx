@@ -1,1 +1,1 @@
-export const DisabledPaths = ["/auth", "/dashboard"];
+export const DisabledPaths = ["/auth", "/admin-panel"];

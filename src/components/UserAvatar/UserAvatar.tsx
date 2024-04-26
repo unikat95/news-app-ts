@@ -6,6 +6,7 @@ type UserAvatarProps = {
   width: string;
   height: string;
   fontSize?: string;
+  borderColor?: string;
 };
 
 export default function UserAvatar({
@@ -18,8 +19,12 @@ export default function UserAvatar({
     <>
       {user?.avatar ? (
         <div
-          className="bg-gray-500 bg-center bg-cover border-8 border-slate-50 rounded-full flex justify-center items-center font-bold text-white shadow-sm overflow-hidden"
-          style={{ width: width, height: height, fontSize: fontSize }}
+          className="bg-gray-500 bg-center bg-cover border-8 border-slate-100 rounded-full flex justify-center items-center font-bold text-white shadow-sm overflow-hidden"
+          style={{
+            width: width,
+            height: height,
+            fontSize: fontSize,
+          }}
         >
           <img src={user.avatar} />
         </div>

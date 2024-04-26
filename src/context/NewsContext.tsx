@@ -18,6 +18,9 @@ import {
   handleCloseDropdown,
   handleSignOut,
   handleEditProfile,
+  handleOpenMenu,
+  handleCloseMenu,
+  removeStyles,
 } from "./UIFunctios";
 
 export const NewsContext = createContext<NewsContextProps | null>(null);
@@ -26,12 +29,16 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [usersList, setUsersList] = useState<UserProps[]>([]);
   const [currentUser, setCurrentUser] = useState<UserProps | null>(null);
+
   const [articles, setArticles] = useState<ArticleProps[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openPopout, setOpenPopout] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const sortedArticles = articles.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -120,6 +127,14 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setOpenPopout,
         openDropdown,
         setOpenDropdown,
+        usersList,
+        setUsersList,
+        articles,
+        setArticles,
+        sortedArticles,
+        openMenu,
+        setOpenMenu,
+
         handleOpenModal: () => handleOpenModal(setIsModalOpen),
         handleCloseModal: () => handleCloseModal(setIsModalOpen),
         handleOpenDropdown: () =>
@@ -128,11 +143,9 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         handleSignOut: () =>
           handleSignOut(setUser, setCurrentUser, setOpenDropdown, setLoading),
         handleEditProfile: () => handleEditProfile(currentUser),
-        usersList,
-        setUsersList,
-        articles,
-        setArticles,
-        sortedArticles,
+        handleOpenMenu: () => handleOpenMenu(openMenu, setOpenMenu),
+        handleCloseMenu: () => handleCloseMenu(setOpenMenu),
+        removeStyles: (html: string) => removeStyles(html),
       }}
     >
       {children}

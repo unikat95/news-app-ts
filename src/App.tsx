@@ -11,12 +11,15 @@ import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import NewsProvider from "./context/NewsContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import Dashboard from "./pages/Dashboard";
+
 import Articles from "./pages/Articles";
 import Users from "./pages/Users";
 import User from "./pages/User";
 import Article from "./pages/Article";
 import CreateArticle from "./components/Dashboard/CreateArticle";
+import AdminPanel from "./pages/AdminPanel";
+import APArticles from "./components/AdminPanel/APArticles/APArticles";
+import APUsers from "./components/AdminPanel/APUsers/APUsers";
 
 function App() {
   const router = createBrowserRouter(
@@ -36,8 +39,10 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/admin-panel" element={<AdminPanel />}>
           <Route path="create-article" element={<CreateArticle />} />
+          <Route path="users" element={<APUsers />} />
+          <Route path="articles-list" element={<APArticles />} />
         </Route>
         <Route path="/auth" element={<Auth />} />
       </Route>
