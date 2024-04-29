@@ -23,7 +23,7 @@ export default function LatestArticle({ article }: LatestArticleProps) {
   if (!removeStyles) return;
 
   return (
-    <div className="w-full h-full flex flex-col gap-5">
+    <div className="w-full h-full flex flex-col gap-5 group">
       <Link
         to={`/articles/${article.id}`}
         className="w-full min-h-[14em] max-h-[14em] group overflow-hidden rounded-xl"
@@ -56,7 +56,16 @@ export default function LatestArticle({ article }: LatestArticleProps) {
             ? HTMLReactParser(removeStyles(article.text.slice(0, 200) + "..."))
             : HTMLReactParser(removeStyles(article.text))}
         </p>
-        <div>{author && <AuthorCard author={author} />}</div>
+        <div>
+          {author && (
+            <AuthorCard
+              author={author}
+              width="3em"
+              height="3em"
+              border="4px solid"
+            />
+          )}
+        </div>
       </div>
     </div>
   );

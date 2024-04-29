@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav
       className={`w-full h-auto ${
         scroll
-          ? "bg-white shadow-sm md:py-2"
+          ? "bg-white shadow-sm md:py-3"
           : "bg-transparent shadow-none md:py-8"
       } flex justify-center items-center fixed top-0 p-5 px-5 xl:px-0 transition-[background,_padding] duration-300 z-[9999]`}
     >

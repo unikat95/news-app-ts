@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { ArticleProps } from "../../context/ContextType";
+import { Link } from "react-router-dom";
+import { ArticleProps } from "../../../context/ContextType";
 
 type ArticleImageProps = {
   article: ArticleProps | null;
@@ -14,20 +15,24 @@ export default function ArticleImage({ article }: ArticleImageProps) {
     image.onload = () => setImageLoaded(true);
   }, [article]);
 
+  if (!article) return;
+
   return (
-    <div className="w-full h-48 lg:h-96">
+    <div className="w-full h-48 lg:h-[30rem]">
       {!imageLoaded && (
         <div className="w-full h-full bg-gray-400 animate-pulse rounded-xl"></div>
       )}
 
-      <img
-        src={article?.image}
-        alt=""
-        className={`w-full h-full object-cover bg-center rounded-xl ${
-          imageLoaded ? "" : "hidden"
-        }`}
-        onLoad={() => setImageLoaded(true)}
-      />
+      <Link to={article?.image} target="_blank">
+        <img
+          src={article?.image}
+          alt=""
+          className={`w-full h-full object-cover bg-center rounded-xl ${
+            imageLoaded ? "" : "hidden"
+          }`}
+          onLoad={() => setImageLoaded(true)}
+        />
+      </Link>
     </div>
   );
 }

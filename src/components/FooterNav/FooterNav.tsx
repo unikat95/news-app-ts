@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import FooterNavItem from "../FooterNavItem/FooterNavItem";
 import { ArticleProps } from "../../context/ContextType";
+import { Link } from "react-router-dom";
+import { NewsContext } from "../../context/NewsContext";
 
 type FooterNavProps = {
   footerQuickLinks?: { id: number; to: string; text: string }[];
@@ -18,15 +20,22 @@ export default function FooterNav({
   padding,
   border,
 }: FooterNavProps) {
+  const { currentUser } = useContext(NewsContext) || {};
+
   return (
     <nav
       className={`${border} ${padding} border-zinc-800 w-auto flex flex-col  gap-4`}
     >
       <h2 className="text-base text-slate-200">{text}</h2>
-      <ul className="w-full flex flex-col gap-1 list-disc ml-4">
+      <ul className="w-full flex flex-col gap-1 list-disc ml-4 footer-list">
         {footerQuickLinks?.map((link) => (
           <FooterNavItem key={link.id} href={link.to} text={link.text} />
         ))}
+        {footerQuickLinks && currentUser?.isAdmin && (
+          <li>
+            <Link to="/admin-panel">Admin Panel</Link>
+          </li>
+        )}
         {footerLatestArticlesLinks?.map((link) => (
           <FooterNavItem
             key={link.id}

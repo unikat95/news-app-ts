@@ -7,6 +7,8 @@ type APLinkItemProps = {
   text: string;
   Icon?: IconType;
   open: boolean;
+  signOut?: () => void;
+  handleToggleSidebar?: () => void;
 };
 
 export default function APLinkItem({
@@ -14,6 +16,8 @@ export default function APLinkItem({
   text,
   Icon,
   open,
+  signOut,
+  handleToggleSidebar,
 }: APLinkItemProps) {
   const location = useLocation();
   const isActive = location.pathname === href;
@@ -24,11 +28,12 @@ export default function APLinkItem({
         to={href}
         className={`w-full py-2 rounded-md flex justify-start items-center gap-4 px-4 ${
           open && "px-4 group"
-        } text-white group ${
+        } group ${
           isActive
-            ? "bg-zinc-100 text-zinc-800 font-medium"
-            : "bg-zinc-800 hover:bg-zinc-700 "
+            ? "bg-neutral-100 text-neutral-800 font-medium"
+            : "bg-neutral-800 hover:bg-neutral-700"
         }`}
+        onClick={signOut || handleToggleSidebar}
       >
         {Icon && (
           <span className="block">
@@ -40,7 +45,7 @@ export default function APLinkItem({
         )}
         <p
           className={`${
-            !open ? "scale-0 lg:scale-100" : "scale-100 lg:scale-0"
+            !open ? "scale-0 lg:scale-100" : "scale-100 lg:scale-100"
           } duration-100 whitespace-nowrap origin-left`}
         >
           {text}

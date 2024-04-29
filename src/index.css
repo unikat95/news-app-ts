@@ -10,6 +10,27 @@
   padding: 0;
 }
 
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(76, 175, 80, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(65, 65, 65);
+  border-radius: 4px;
+}
+
+*.dark::-webkit-scrollbar-track {
+  background: rgba(76, 175, 80, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(171, 171, 171);
+}
+
 html,
 body {
   min-height: -webkit-fill-available;
@@ -17,7 +38,26 @@ body {
 
 body {
   font-family: "Poppins", sans-serif;
-  background: rgb(244, 244, 245);
+  background: rgb(244, 244, 244);
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 3rem;
+}
+
+.list-none {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer-list {
+  list-style-type: disc;
+  padding: 0;
+}
+
+.art-link {
+  text-decoration: underline;
 }
 
 #root {
@@ -85,6 +125,28 @@ body {
 .hamburger-menu.active::after {
   transform: rotate(-45deg);
   box-shadow: none;
+}
+
+.jodit-toolbar__box {
+  top: 0rem !important;
+}
+
+.jodit-toolbar-editor-collection {
+  background: white;
+}
+
+.jodit-wysiwyg {
+  background-color: rgb(244 244 245 / var(--tw-bg-opacity));
+  color: rgb(51 65 85 / var(--tw-text-opacity));
+  padding: 1rem !important;
+}
+
+.jodit-status-bar {
+  display: none;
+}
+
+.jodit-add-new-line {
+  display: none;
 }
 
 @keyframes modal-opacity {

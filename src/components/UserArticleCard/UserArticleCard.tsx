@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ArticleProps } from "../../context/ContextType";
 import { Link } from "react-router-dom";
+import HTMLReactParser from "html-react-parser/lib/index";
+import { NewsContext } from "../../context/NewsContext";
 
 type UserArticleCardProps = {
   article: ArticleProps | null;
 };
 
 export default function UserArticleCard({ article }: UserArticleCardProps) {
+  const { removeStyles } = useContext(NewsContext) || {};
+
+  if (!removeStyles) return;
+
   return (
     <>
       {article && (
@@ -24,7 +30,9 @@ export default function UserArticleCard({ article }: UserArticleCardProps) {
           </div>
           <div className="text-sm text-slate-500">
             {article?.text.length > 100
-              ? article?.text.slice(0, 100) + "..."
+              ? HTMLReactParser(
+                  removeStyles(article?.text.slice(0, 100) + "...")
+                )
               : article?.text}
           </div>
         </Link>

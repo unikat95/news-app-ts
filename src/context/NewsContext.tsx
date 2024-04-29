@@ -31,6 +31,8 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [currentUser, setCurrentUser] = useState<UserProps | null>(null);
 
   const [articles, setArticles] = useState<ArticleProps[]>([]);
+  const [category, setCategory] = useState<string>("");
+  const [releaseSort, setReleaseSort] = useState<boolean>(false);
 
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
@@ -104,7 +106,7 @@ export default function NewsProvider({ children }: NewsProviderProps) {
     if (openPopout) {
       setTimeout(() => {
         setOpenPopout(false);
-      }, 3000);
+      }, 5000);
     }
   }, [openPopout]);
 
@@ -131,6 +133,10 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         setUsersList,
         articles,
         setArticles,
+        category,
+        setCategory,
+        releaseSort,
+        setReleaseSort,
         sortedArticles,
         openMenu,
         setOpenMenu,

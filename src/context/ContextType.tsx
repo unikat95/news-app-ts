@@ -1,5 +1,5 @@
 import { User } from "firebase/auth";
-import { SetStateAction } from "react";
+import React, { SetStateAction } from "react";
 
 export type UserProps = {
   id: string;
@@ -14,14 +14,31 @@ export type UserProps = {
   inEditing: boolean;
 };
 
+export type ReplyProps = {
+  id: string;
+  author: string;
+  text: string;
+  written: string;
+};
+
+export type CommentProps = {
+  id: string;
+  author: string;
+  text: string;
+  written: string;
+  replies: ReplyProps[];
+};
+
 export type ArticleProps = {
   id: string;
   author: string;
   image: string;
   text: string;
   title: string;
+  category: string;
   createdAt: Date;
   key: string;
+  comments: CommentProps[];
 };
 
 export type NewsContextProps = {
@@ -43,7 +60,11 @@ export type NewsContextProps = {
   setUsersList: React.Dispatch<SetStateAction<UserProps[]>>;
   articles: ArticleProps[];
   setArticles: React.Dispatch<SetStateAction<ArticleProps[]>>;
+  category: string;
+  setCategory: React.Dispatch<SetStateAction<string>>;
   sortedArticles: ArticleProps[];
+  releaseSort: boolean;
+  setReleaseSort: React.Dispatch<SetStateAction<boolean>>;
 
   handleCloseModal: () => void;
   handleOpenModal: () => void;

@@ -1,6 +1,5 @@
 import React from "react";
 import LatestArticles from "../components/LatestArticles/LatestArticles";
-import Articles from "./Articles";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -9,7 +8,7 @@ export default function Home() {
       <LatestArticles />
       <div className="flex flex-col justify-center items-start gap-10">
         <h1 className="text-3xl text-slate-700 font-medium">Other articles:</h1>
-        <Articles slice={5} />
+
         <Link to="/articles" className="w-full text-lg underline text-center">
           See all articles...
         </Link>

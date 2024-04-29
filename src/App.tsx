@@ -16,10 +16,12 @@ import Articles from "./pages/Articles";
 import Users from "./pages/Users";
 import User from "./pages/User";
 import Article from "./pages/Article";
-import CreateArticle from "./components/Dashboard/CreateArticle";
+
 import AdminPanel from "./pages/AdminPanel";
 import APArticles from "./components/AdminPanel/APArticles/APArticles";
 import APUsers from "./components/AdminPanel/APUsers/APUsers";
+import APCreateArticle from "./components/AdminPanel/APCreateArticle/APCreateArticle";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const router = createBrowserRouter(
@@ -40,11 +42,13 @@ function App() {
           }
         />
         <Route path="/admin-panel" element={<AdminPanel />}>
-          <Route path="create-article" element={<CreateArticle />} />
+          <Route index element={<div>APHome</div>} />
+          <Route path="create-article" element={<APCreateArticle />} />
           <Route path="users" element={<APUsers />} />
           <Route path="articles-list" element={<APArticles />} />
         </Route>
         <Route path="/auth" element={<Auth />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     )
   );

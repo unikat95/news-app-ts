@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import UserNavLink from "../../UserNavLink/UserNavLink";
 import { NewsContext } from "../../../context/NewsContext";
 
-export default function APNAvbar() {
+export default function APNavbar() {
   const { currentUser } = useContext(NewsContext) || {};
   return (
     <nav className="w-full h-auto bg-white flex justify-end items-end p-5 text-white shadow-md z-[99]">
