@@ -40,7 +40,7 @@ export default function ArticleAddComment({ article }: ArticleAddCommentProps) {
     setMessage(e.target.value);
   };
   return (
-    <div className="w-full bg-white rounded-md shadow-sm flex flex-col  p-5">
+    <div className="w-full bg-slate-100 border-[1px] flex flex-col p-5">
       <form
         action=""
         className="w-full flex flex-col justify-center items-end gap-3"
@@ -52,7 +52,7 @@ export default function ArticleAddComment({ article }: ArticleAddCommentProps) {
           placeholder="comment..."
           cols={30}
           rows={4}
-          className="w-full h-auto bg-slate-100 outline-none resize-none p-2"
+          className="w-full h-auto bg-white outline-none resize-none p-2"
           value={message}
           onChange={handleMessageChange}
         ></textarea>

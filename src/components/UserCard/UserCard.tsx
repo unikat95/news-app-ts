@@ -21,7 +21,7 @@ export default function UserCard({
   return (
     <Link
       to={`${currentUser?.id === id ? "/profile" : `/users/user/${id}`}`}
-      className="w-full h-full bg-white hover:bg-slate-50 flex flex-col justify-center items-center rounded-md shadow-sm p-10 gap-5"
+      className="w-full h-full bg-white hover:bg-slate-50 flex flex-col justify-center items-center border-[1px] p-10 gap-5"
     >
       {avatar ? (
         <img src={avatar} className="w-24 h-24 rounded-full" />
@@ -32,7 +32,7 @@ export default function UserCard({
         </div>
       )}
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="text-regular font-bold text-slate-500">
+        <div className="text-sm font-bold text-slate-500">
           {firstName} {lastName}
         </div>
         <div className="text-sm font-medium text-slate-500">

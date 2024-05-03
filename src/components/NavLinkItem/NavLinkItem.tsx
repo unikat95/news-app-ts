@@ -19,7 +19,7 @@ export default function NavLinkItem({
       <NavLink
         to={href}
         onClick={handleCloseMenu}
-        className="text-2xl md:text-base"
+        className="text-4xl md:text-base font-medium"
       >
         {name}
       </NavLink>

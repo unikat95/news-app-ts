@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { ArticleCategoryList } from "../../Article/ArticleCategoryList";
 
 type APCreateArticleSelectProps = {
   handleCategoryChange: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -16,12 +17,11 @@ export default function APCreateArticleSelect({
         onChange={handleCategoryChange}
       >
         <option value="">Chose a category</option>
-        <option value="world">World</option>
-        <option value="gaming">Gaming</option>
-        <option value="sport">Sport</option>
-        <option value="culture">Culture</option>
-        <option value="traveling">Traveling</option>
-        <option value="politics">Politics</option>
+        {ArticleCategoryList.map((cat) => (
+          <option key={cat.id} value={cat.value}>
+            {cat.name}
+          </option>
+        ))}
       </select>
     </label>
   );

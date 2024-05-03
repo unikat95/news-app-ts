@@ -18,9 +18,9 @@ export default function Footer() {
 
   return (
     <div className="w-full h-auto flex flex-col justify-center items-center bg-zinc-900 text-white text-sm relative bottom-0 ">
-      <div className="w-full max-w-[1300px] h-full flex justify-start items-start py-14 px-5 xl:px-0 gap-10">
+      <div className="w-full max-w-[1240px] h-full flex justify-start items-start py-14 px-5 xl:px-0 gap-10">
         <div className="w-full flex flex-col md:flex-row justify-between items-center md:items-start gap-20 lg:gap-10">
-          <div className="w-full flex gap-10 md:gap-20">
+          <div className="w-full grid grid-cols-[auto,_1fr] gap-10 md:gap-20">
             <FooterNav
               footerQuickLinks={footerQuickLinks}
               text="Quick links"

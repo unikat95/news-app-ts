@@ -18,12 +18,15 @@ export default function UserNavLink({ adminPanel }: UserNavLinkProps) {
     <>
       <li
         className={`${
-          adminPanel ? "flex" : "hidden md:flex "
+          adminPanel ? "flex" : "hidden md:flex"
         } relative text-nowrap`}
       >
-        <button className="relative group" onClick={handleOpenDropdown}>
+        <button
+          className="relative group user-dropdown"
+          onClick={handleOpenDropdown}
+        >
           <UserAvatar user={currentUser} width="3.6em" height="3.6em" />
-          <span className="justify-center bg-slate-100 items-center absolute bottom-0 right-2 rounded-sm">
+          <span className="justify-center bg-white items-center absolute bottom-0 right-2 rounded-sm">
             <IoMdArrowDropdown className={`${openDropdown && "rotate-180"}`} />
           </span>
         </button>

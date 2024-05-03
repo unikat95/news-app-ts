@@ -21,7 +21,7 @@ export default function ArticleReplyCard({
 }: ArticleReplyCardProps) {
   return (
     <>
-      <div className="w-full flex flex-col justify-center items-start bg-white p-5 gap-3 rounded-md shadow-sm relative">
+      <div className="w-full flex flex-col justify-center items-start bg-white p-5 gap-3 border-[1px] relative">
         <div className="flex justify-center items-center gap-3">
           {repAuthor?.avatar ? (
             <>

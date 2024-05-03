@@ -7,9 +7,9 @@ export default function Logo() {
     <div className="z-[100]">
       <Link
         to="/"
-        className="text-xl font-semibold text-slate-700 flex justify-center items-center gap-2"
+        className="text-xl font-bold text-black flex justify-center items-center gap-2"
       >
-        <BsPen size={20} />
+        <BsPen size={22} />
         NewsApp_
       </Link>
     </div>

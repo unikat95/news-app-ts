@@ -1,70 +1,59 @@
-import React, { useContext, useEffect, useState } from "react";
-import { ArticleProps } from "../../context/ContextType";
+import React, { useContext } from "react";
+import { ArticleProps, UserProps } from "../../context/ContextType";
+import { Link, useNavigate } from "react-router-dom";
 import { NewsContext } from "../../context/NewsContext";
-import AuthorCard from "../AuthorCard/AuthorCard";
-import { Link } from "react-router-dom";
-import HTMLReactParser from "html-react-parser/lib/index";
 
 type LatestArticleProps = {
-  article: ArticleProps;
+  art: ArticleProps;
+  author: UserProps | undefined;
 };
 
-export default function LatestArticle({ article }: LatestArticleProps) {
-  const { usersList, removeStyles } = useContext(NewsContext) || {};
-  const author = usersList?.find((user) => user.id === article.author);
-  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+export default function LatestArticle({ art, author }: LatestArticleProps) {
+  const { currentUser, setCategory } = useContext(NewsContext) || {};
 
-  useEffect(() => {
-    const image = new Image();
-    image.src = article?.image || "";
-    image.onload = () => setImageLoaded(true);
-  }, [article]);
+  const navigate = useNavigate();
 
-  if (!removeStyles) return;
+  if (!setCategory) return;
+
+  const handleSetCategory = (category: string) => {
+    setCategory(category);
+    navigate("/articles");
+  };
 
   return (
-    <div className="w-full h-full flex flex-col gap-5 group">
-      <Link
-        to={`/articles/${article.id}`}
-        className="w-full min-h-[14em] max-h-[14em] group overflow-hidden rounded-xl"
-      >
-        {!imageLoaded && (
-          <div className="w-full h-full bg-gray-400 animate-pulse rounded-xl"></div>
-        )}
-        <img
-          src={article.image}
-          alt=""
-          className="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-2 duration-200"
-        />
-      </Link>
-      <div className="flex flex-col gap-1">
-        <span className="text-xs text-slate-500 font-medium uppercase">
-          Posted: {new Date(article.createdAt).toLocaleString()}
-        </span>
-        <Link
-          to={`/articles/${article.id}`}
-          className="text-xl text-slate-800 font-bold hover:underline"
-        >
-          {article.title.length > 65
-            ? article.title.slice(0, 65) + "..."
-            : article.title}
-        </Link>
-      </div>
-      <div className="w-full h-full flex flex-col justify-between items-start gap-5">
-        <p className="text-slate-600">
-          {article.text.length > 200
-            ? HTMLReactParser(removeStyles(article.text.slice(0, 200) + "..."))
-            : HTMLReactParser(removeStyles(article.text))}
-        </p>
-        <div>
-          {author && (
-            <AuthorCard
-              author={author}
-              width="3em"
-              height="3em"
-              border="4px solid"
-            />
-          )}
+    <div
+      className="w-full h-full flex flex-col justify-end items-start bg-cover bg-center p-5 relative after:absolute after:w-full after:h-full after:top-0 after:left-0 after:bg-gradient-to-b after:from-transparent after:to-slate-950 hover:after:to-black z-0 group"
+      style={{ backgroundImage: `url("${art.image}")` }}
+    >
+      <div className="w-full flex flex-col justify-start items-start mt-20 z-10 gap-4">
+        <div className="w-full flex flex-col justify-start items-start gap-1">
+          <button
+            onClick={() => handleSetCategory(art.category)}
+            className="w-auto h-auto bg-amber-600 p-2 text-xs uppercase rounded-sm text-white font-bold"
+          >
+            {art.category}
+          </button>
+          <Link
+            to={`/articles/${art.id}`}
+            className="text-white text-xl md:text-2xl font-bold hover:underline line-clamp-1"
+          >
+            {art.title}
+          </Link>
+        </div>
+        <div className="w-full flex justify-between items-center gap-5">
+          <Link
+            to={`${
+              currentUser?.id === art.author
+                ? "/profile"
+                : `/users/user/${art.author}`
+            }`}
+            className="text-white text-xs md:text-sm font-medium"
+          >
+            {author?.firstName} {author?.lastName},
+          </Link>
+          <span className="text-white text-xs md:text-sm font-normal text-nowrap">
+            {new Date(art.createdAt).toLocaleString()}
+          </span>
         </div>
       </div>
     </div>

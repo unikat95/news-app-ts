@@ -7,7 +7,9 @@ import { NewsContext } from "../../context/NewsContext";
 
 type FooterNavProps = {
   footerQuickLinks?: { id: number; to: string; text: string }[];
-  footerLatestArticlesLinks?: ArticleProps[];
+  footerLatestArticlesLinks?:
+    | ArticleProps[]
+    | { id: number; name: string; value: string }[];
   text: string;
   padding?: string;
   border?: string;
@@ -40,11 +42,7 @@ export default function FooterNav({
           <FooterNavItem
             key={link.id}
             href={`articles/${link.id}`}
-            text={
-              link.title.length > 30
-                ? link.title.slice(0, 30) + "..."
-                : link.title
-            }
+            text={link.title}
           />
         ))}
       </ul>

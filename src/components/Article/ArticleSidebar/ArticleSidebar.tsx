@@ -17,7 +17,7 @@ export default function ArticleSidebar({ article }: ArticleSidebarProps) {
   );
 
   return (
-    <div className="w-full flex flex-col lg:max-w-[360px] gap-7  sticky top-32">
+    <div className="w-full flex flex-col lg:max-w-[360px] gap-5  sticky top-24">
       <ArticleSidebarLatest
         recommend={false}
         text="Recent articles"

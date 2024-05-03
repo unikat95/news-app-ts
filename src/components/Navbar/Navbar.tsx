@@ -21,13 +21,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full h-auto ${
-        scroll
-          ? "bg-white shadow-sm md:py-3"
-          : "bg-transparent shadow-none md:py-8"
-      } flex justify-center items-center fixed top-0 p-5 px-5 xl:px-0 transition-[background,_padding] duration-300 z-[9999]`}
+      className={`w-full h-auto bg-white ${
+        scroll ? "shadow-sm border-none" : "shadow-none border-b lg:py-6"
+      } flex justify-center items-center fixed top-0 p-5 lg:p-2 transition-[background,_padding] duration-300 z-[9999]`}
     >
-      <div className="max-w-[1300px] w-full h-auto flex justify-between items-center">
+      <div className="max-w-[1240px] w-full h-auto flex justify-between items-center">
         <Logo />
         <NavMenu />
         <button

@@ -47,7 +47,7 @@ export default function ArticleCommentCard({
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-start bg-white p-5 gap-3 rounded-md shadow-sm relative">
+    <div className="w-full flex flex-col justify-center items-start bg-white p-5 gap-3 border-[1px] relative">
       <div className="flex justify-center items-center gap-3">
         {author?.avatar ? (
           <>
@@ -88,8 +88,8 @@ export default function ArticleCommentCard({
         </button>
       </div>
       {author?.id === artAuthor && (
-        <div className="absolute -top-2 -left-2 bg-[#f4f4f5] text-yellow-400 p-1 rounded-full">
-          <FaCrown size={20} />
+        <div className="absolute -top-2 -left-2 border-[1px] bg-white text-yellow-400 p-1 rounded-full">
+          <FaCrown size={16} />
         </div>
       )}
     </div>

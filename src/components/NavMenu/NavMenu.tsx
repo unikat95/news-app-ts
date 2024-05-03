@@ -18,7 +18,7 @@ export default function NavMenu() {
         openMenu
           ? "translate-y-0"
           : "translate-y-[-150dvh] md:translate-y-0 md:duration-0"
-      } flex flex-col justify-center items-center md:relative md:w-auto md:h-auto md:flex md:flex-row md:justify-end md:items-center md:bg-transparent gap-10 list-none`}
+      } flex flex-col justify-center items-center md:relative md:w-auto md:h-auto md:flex md:flex-row md:justify-end md:items-center md:bg-transparent gap-10  list-none`}
     >
       {NavLinks.map((link) => (
         <NavLinkItem
