@@ -28,7 +28,7 @@ export default function UserProfile({
     <div className="w-full lg:w-2/3 flex flex-col gap-5 xl:p-0">
       <h1 className="hidden md:block">User information:</h1>
       <div className="w-full flex justify-center items-center relative border-[1px]">
-        <div className="w-full flex flex-col justify-center items-center gap-3 md:gap-7 p-5">
+        <div className="w-full flex flex-col justify-center items-center gap-3 md:gap-5 p-5">
           <UserDetails user={user} />
           {location.pathname === "/profile" && (
             <div className="w-full flex flex-wrap sm:flex-nowrap justify-end items-end gap-3">
@@ -38,7 +38,11 @@ export default function UserProfile({
               >
                 <IoMdSettings size={24} />
               </button>
-              <ProfileButton href="/" text="Messages" Icon={MdMessage} />
+              <ProfileButton
+                href="/messages"
+                text="Messages"
+                Icon={MdMessage}
+              />
               <ProfileButton
                 handleClick={handleSignOut}
                 text="Logout"

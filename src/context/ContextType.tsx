@@ -21,6 +21,13 @@ export type ReplyProps = {
   written: string;
 };
 
+export type MessageReplyProps = {
+  author: string;
+  msg: string;
+  createdAt: Date;
+  unread: boolean;
+};
+
 export type CommentProps = {
   id: string;
   author: string;
@@ -39,6 +46,17 @@ export type ArticleProps = {
   createdAt: Date;
   key: string;
   comments: CommentProps[];
+};
+
+export type MessageProps = {
+  id: string;
+  from: string;
+  to: string;
+  title: string;
+  message: string;
+  unread: boolean;
+  createdAt: Date;
+  replies: MessageReplyProps[];
 };
 
 export type NewsContextProps = {
@@ -65,6 +83,10 @@ export type NewsContextProps = {
   sortedArticles: ArticleProps[];
   releaseSort: boolean;
   setReleaseSort: React.Dispatch<SetStateAction<boolean>>;
+  messageList: MessageProps[];
+  setMessageList: React.Dispatch<SetStateAction<MessageProps[]>>;
+  dot: boolean;
+  setDot: React.Dispatch<SetStateAction<boolean>>;
 
   handleCloseModal: () => void;
   handleOpenModal: () => void;

@@ -62,7 +62,7 @@ export default function ArticleAddReply({
     setMessage(e.target.value);
   };
   return (
-    <div className="w-[90%] bg-white rounded-md shadow-sm flex flex-col p-5 relative">
+    <div className="w-[90%] bg-white border-[1px] rounded-md shadow-sm flex flex-col p-5 relative">
       <form
         action=""
         className="w-full flex flex-col justify-center items-end gap-3"

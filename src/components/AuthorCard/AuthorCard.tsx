@@ -11,6 +11,7 @@ type AuthorCardProps = {
   width?: string;
   height?: string;
   border?: string;
+  fontSize?: string;
 };
 
 export default function AuthorCard({
@@ -20,6 +21,7 @@ export default function AuthorCard({
   width,
   height,
   border,
+  fontSize,
 }: AuthorCardProps) {
   const { currentUser } = useContext(NewsContext) || {};
   return (
@@ -36,6 +38,7 @@ export default function AuthorCard({
         width={`${width ? width : "4em"}`}
         height={`${height ? height : "4em"}`}
         border={border}
+        fontSize={fontSize}
       />
       <div
         className={`flex flex-col justify-center ${

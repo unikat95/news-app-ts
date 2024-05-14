@@ -80,21 +80,10 @@ export default function EditProfile({ user }: EditProfileProps) {
       await updateDoc(userRef, { inEditing: false });
     }
   };
-
-  const handleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
-
   return (
     <>
-      <div
-        className="w-[100dvw] h-[100dvh] flex justify-center items-center fixed top-0 left-0 bg-slate-900 bg-opacity-90 modal-bg z-[99999]"
-        onClick={handleCancelChanges}
-      >
-        <div
-          className="w-full max-w-[90%] sm:max-w-[60%] lg:max-w-[40%] xl:max-w-[25%] h-auto flex flex-col gap-6 bg-white p-6 rounded-xl modal-anim"
-          onClick={handleContentClick}
-        >
+      <div className="w-[100dvw] h-[100dvh] flex justify-center items-center fixed top-0 left-0 bg-slate-900 bg-opacity-90 modal-bg z-[99999]">
+        <div className="w-full max-w-[90%] sm:max-w-[60%] lg:max-w-[40%] xl:max-w-[25%] h-auto flex flex-col gap-6 bg-white p-6 rounded-xl modal-anim">
           <h1 className="flex justify-center items-center text-2xl font-medium">
             User detail
           </h1>

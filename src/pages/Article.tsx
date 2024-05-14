@@ -27,15 +27,15 @@ export default function Article() {
   return (
     <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-5">
       <div className="w-full lg:max-w-[1140px] flex flex-col justify-center items-center xl:p-0 gap-10">
-        <div className="w-full flex flex-col gap-10 py-10 lg:gap-10 relative border-b-[1px]">
+        <div className="w-full flex flex-col gap-10 py-10 relative border-b-[1px]">
           <div className="w-auto h-auto bg-amber-600 p-2 text-xs uppercase px-4 rounded-sm text-white font-bold absolute top-0 left-0">
             <button type="button" className="text-white" onClick={goToCategory}>
               {article.category}
             </button>
           </div>
-          <div className="w-full flex flex-col gap-2">
-            <div className="w-full flex flex-col justify-center items-start gap-5 mt-10">
-              <div className="text-xs uppercase font-bold text-slate-400 mt-2">
+          <div className="w-full flex flex-col gap-3">
+            <div className="w-full flex flex-col justify-center items-start gap-3 mt-5">
+              <div className="text-xs uppercase font-bold text-slate-400">
                 Posted: {new Date(article.createdAt).toLocaleString()}
               </div>
               <h1 className="text-3xl text-slate-700 font-bold">

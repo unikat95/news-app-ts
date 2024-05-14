@@ -12,7 +12,7 @@ export default function ArticleList() {
     <div className="w-full flex flex-col lg:flex-row justify-center items-start gap-5">
       <div className="w-full flex flex-col">
         <h1 className="w-full h-auto relative after:absolute after:w-full after:h-1 after:bg-amber-500 after:-bottom-0 after:left-0 py-2">
-          <span className="bg-amber-500 px-4 py-2 text-xl text-white font-medium">
+          <span className="bg-amber-500 px-4 py-2 text-base text-white font-medium">
             Other articles
           </span>
         </h1>

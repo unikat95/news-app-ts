@@ -61,7 +61,7 @@ export default function ArticleListItem({ art }: ArticleListItemProps) {
           </p>
           <Link
             to={`/articles/${art.id}`}
-            className="text-2xl text-slate-900 font-bold hover:underline line-clamp-2"
+            className="text-2xl text-slate-900 font-bold hover:underline line-clamp-1 md:line-clamp-2"
           >
             {art.title}
           </Link>
@@ -72,7 +72,7 @@ export default function ArticleListItem({ art }: ArticleListItemProps) {
         <div className="w-full flex justify-between items-end gap-1">
           <div className="flex flex-col md:flex-row justify-end items-start gap-1 text-slate-500 font-medium text-sm">
             <div className="flex flex-col xl:flex-row justify-start items-start xl:gap-3">
-              <div className="flex justify-center items-center gap-1">
+              <div className="flex f justify-center items-center gap-1">
                 <FaUser size={11} className="mb-[2px]" />
                 <span> Author:</span>
                 <Link
@@ -81,7 +81,7 @@ export default function ArticleListItem({ art }: ArticleListItemProps) {
                       ? "/profile"
                       : `/users/user/${art.author}`
                   }`}
-                  className="text-slate-700 hover:underline"
+                  className="text-slate-700 hover:underline text-nowrap"
                 >
                   {author?.firstName} {author?.lastName},
                 </Link>
@@ -101,7 +101,7 @@ export default function ArticleListItem({ art }: ArticleListItemProps) {
           </div>
           <Link
             to={`/articles/${art.id}`}
-            className="flex justify-center items-center gap-1 underline text-slate-800 hover:text-slate-600"
+            className="flex justify-center items-center gap-1 underline text-slate-800 hover:text-slate-600 text-nowrap"
           >
             Read more <BiLinkExternal size={16} />
           </Link>

@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav
       className={`w-full h-auto bg-white ${
         scroll ? "shadow-sm border-none" : "shadow-none border-b lg:py-6"
-      } flex justify-center items-center fixed top-0 p-5 lg:p-2 transition-[background,_padding] duration-300 z-[9999]`}
+      } flex justify-center items-center fixed top-0 py-5 px-3 lg:p-2 transition-[background,_padding] duration-300 z-[9999]`}
     >
       <div className="max-w-[1240px] w-full h-auto flex justify-between items-center">
         <Logo />

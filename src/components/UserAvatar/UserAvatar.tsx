@@ -34,7 +34,12 @@ export default function UserAvatar({
       ) : (
         <div
           className="bg-gray-500 bg-center bg-cover border-8 border-slate-50 rounded-full flex justify-center items-center font-bold text-white shadow-sm"
-          style={{ width: width, height: height, fontSize: fontSize }}
+          style={{
+            width: width,
+            height: height,
+            fontSize: fontSize,
+            border: `${border ? border : "8px solid"}`,
+          }}
         >
           {user?.firstName.slice(0, 1).toUpperCase()}
           {user?.lastName.slice(0, 1).toUpperCase()}

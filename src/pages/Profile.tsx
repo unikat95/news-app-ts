@@ -23,7 +23,7 @@ export default function Profile() {
       {currentUser && (
         <>
           <PopoutMsg message="User information successfully saved" />
-          <div className="w-full flex flex-col lg:flex-row gap-5 justify-start items-start">
+          <div className="w-full flex flex-col lg:flex-row gap-4 justify-start items-start">
             <UserProfile
               user={currentUser}
               handleEditProfile={handleEditProfile}

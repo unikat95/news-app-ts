@@ -6,6 +6,7 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 import PageLoading from "../components/PageLoading/PageLoading";
 import {
   ArticleProps,
+  MessageProps,
   NewsContextProps,
   NewsProviderProps,
   UserProps,
@@ -34,6 +35,8 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [category, setCategory] = useState<string>("");
   const [releaseSort, setReleaseSort] = useState<boolean>(false);
 
+  const [messageList, setMessageList] = useState<MessageProps[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
 
@@ -41,6 +44,8 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   const [openPopout, setOpenPopout] = useState<boolean>(false);
   const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+
+  const [dot, setDot] = useState<boolean>(false);
 
   const sortedArticles = articles.sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -103,12 +108,45 @@ export default function NewsProvider({ children }: NewsProviderProps) {
   }, []);
 
   useEffect(() => {
+    const messageListUnsubscribe = onSnapshot(
+      collection(db, "messages"),
+      (messages) => {
+        const messagesData: MessageProps[] = [];
+        messages.forEach((doc) => {
+          messagesData.push(doc.data() as MessageProps);
+        });
+        setMessageList(messagesData);
+      }
+    );
+
+    return () => messageListUnsubscribe();
+  }, []);
+
+  useEffect(() => {
     if (openPopout) {
       setTimeout(() => {
         setOpenPopout(false);
       }, 5000);
     }
   }, [openPopout]);
+
+  useEffect(() => {
+    const hasUnreadMessage = messageList?.some((msg) => {
+      const hasUnreadReply = msg.replies.some((reply) => {
+        if (reply.author === currentUser?.id && reply.unread) {
+          reply.unread = false;
+        }
+        return reply.unread;
+      });
+      return (msg.unread && msg.from !== currentUser?.id) || hasUnreadReply;
+    });
+
+    if (hasUnreadMessage) {
+      setDot?.(true);
+    } else {
+      setDot?.(false);
+    }
+  }, [messageList, currentUser, setDot]);
 
   if (loading || initializing) return <PageLoading />;
 
@@ -140,6 +178,10 @@ export default function NewsProvider({ children }: NewsProviderProps) {
         sortedArticles,
         openMenu,
         setOpenMenu,
+        messageList,
+        setMessageList,
+        dot,
+        setDot,
 
         handleOpenModal: () => handleOpenModal(setIsModalOpen),
         handleCloseModal: () => handleCloseModal(setIsModalOpen),

@@ -9,7 +9,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
 export default function DropdownMenu() {
-  const { handleCloseDropdown, handleSignOut, currentUser } =
+  const { handleCloseDropdown, handleSignOut, currentUser, dot } =
     useContext(NewsContext) || {};
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -23,7 +23,6 @@ export default function DropdownMenu() {
         !(event.target as HTMLElement).closest(".user-dropdown")
       ) {
         handleCloseDropdown?.();
-        console.log("click");
       }
     };
 
@@ -32,8 +31,6 @@ export default function DropdownMenu() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [handleCloseDropdown]);
-
-  console.log(dropdownRef.current);
 
   return (
     <div
@@ -53,11 +50,13 @@ export default function DropdownMenu() {
         </li>
         <li className="flex">
           <Link
-            to=""
-            className="w-full px-6 py-2 hover:bg-zinc-200 flex justify-start items-center gap-2 rounded-md"
+            to="/messages"
+            className={`w-full px-6 py-2 hover:bg-zinc-200 flex justify-start items-center gap-2 rounded-md relative ${
+              dot && " text-sky-600"
+            }`}
             onClick={handleCloseDropdown}
           >
-            <BiMessageSquareDots size={16} className="text-slate-600" />
+            <BiMessageSquareDots size={16} />
             Messages
           </Link>
         </li>

@@ -10,8 +10,13 @@ type UserNavLinkProps = {
 };
 
 export default function UserNavLink({ adminPanel }: UserNavLinkProps) {
-  const { currentUser, openDropdown, handleOpenDropdown, handleCloseMenu } =
-    useContext(NewsContext) || {};
+  const {
+    currentUser,
+    openDropdown,
+    handleOpenDropdown,
+    handleCloseMenu,
+    dot,
+  } = useContext(NewsContext) || {};
 
   if (!currentUser || !handleCloseMenu) return;
   return (
@@ -29,6 +34,9 @@ export default function UserNavLink({ adminPanel }: UserNavLinkProps) {
           <span className="justify-center bg-white items-center absolute bottom-0 right-2 rounded-sm">
             <IoMdArrowDropdown className={`${openDropdown && "rotate-180"}`} />
           </span>
+          {dot && (
+            <span className="absolute top-2 right-2 w-2 h-2 bg-sky-500 rounded-full animate-pulse"></span>
+          )}
         </button>
         {openDropdown && <DropdownMenu />}
       </li>

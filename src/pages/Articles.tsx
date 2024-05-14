@@ -96,6 +96,7 @@ export default function Articles({ slice }: ArticlesType) {
                     handleSetCategory={handleSetCategory}
                     setImageLoaded={setImageLoaded}
                     imageLoadedStates={imageLoadedStates}
+                    key={article.id}
                   />
                 );
               })

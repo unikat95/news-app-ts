@@ -15,11 +15,15 @@ export default function NavLinkItem({
   hidden,
 }: NavLinkItemProps) {
   return (
-    <li className={`${name === "Profile" && "md:hidden flex"} ${hidden}`}>
+    <li
+      className={`w-full flex flex-col justify-center items-center ${
+        (name === "Profile" || name === "Messages") && "md:hidden flex"
+      } ${hidden}`}
+    >
       <NavLink
         to={href}
         onClick={handleCloseMenu}
-        className="text-4xl md:text-base font-medium"
+        className="text-2xl md:text-base font-medium"
       >
         {name}
       </NavLink>

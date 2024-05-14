@@ -35,6 +35,11 @@ export default function NavMenu() {
             name="Profile"
             handleCloseMenu={handleCloseMenu}
           />
+          <NavLinkItem
+            href="/messages"
+            name="Messages"
+            handleCloseMenu={handleCloseMenu}
+          />
           <UserNavLink adminPanel={false} />
         </>
       )}

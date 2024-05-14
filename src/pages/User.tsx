@@ -14,7 +14,7 @@ export default function User() {
 
   return (
     <>
-      <div className="w-full flex flex-col lg:flex-row gap-5 justify-start items-start">
+      <div className="w-full flex flex-col lg:flex-row gap-4 justify-start items-start">
         <UserProfile user={user} />
         <UserArticles user={user} />
       </div>

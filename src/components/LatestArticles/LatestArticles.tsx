@@ -30,7 +30,7 @@ export default function LatestArticles() {
               })
               .slice(1, 2)}
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             {sortedArticles
               ?.map((art) => {
                 const author = usersList?.find(
